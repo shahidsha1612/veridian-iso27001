@@ -1,0 +1,57 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "EvidenceVaultS3",
+      "Effect": "Allow",
+      "Action": [
+        "s3:CreateBucket",
+        "s3:PutBucketVersioning",
+        "s3:PutBucketObjectLockConfiguration",
+        "s3:PutEncryptionConfiguration",
+        "s3:PutBucketPolicy",
+        "s3:PutBucketPublicAccessBlock",
+        "s3:PutBucketTagging",
+        "s3:DeleteBucket",
+        "s3:Get*",
+        "s3:List*"
+      ],
+      "Resource": "arn:aws:s3:::veridian-iso27001-evidence-vault"
+    },
+    {
+      "Sid": "EvidenceVaultKMS",
+      "Effect": "Allow",
+      "Action": [
+        "kms:CreateKey",
+        "kms:CreateAlias",
+        "kms:DeleteAlias",
+        "kms:DescribeKey",
+        "kms:EnableKeyRotation",
+        "kms:GetKeyPolicy",
+        "kms:GetKeyRotationStatus",
+        "kms:PutKeyPolicy",
+        "kms:TagResource",
+        "kms:ListAliases",
+        "kms:ScheduleKeyDeletion",
+        "kms:ListResourceTags"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "WhoAmI",
+      "Effect": "Allow",
+      "Action": "sts:GetCallerIdentity",
+      "Resource": "*"
+    },
+    {
+      "Sid": "BudgetAlerts",
+      "Effect": "Allow",
+      "Action": [
+        "budgets:ViewBudget",
+        "budgets:ModifyBudget",
+        "budgets:ListTagsForResource"
+      ],
+      "Resource": "arn:aws:budgets::037048679942:budget/*"
+    }
+  ]
+}

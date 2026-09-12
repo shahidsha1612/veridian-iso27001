@@ -1,0 +1,28 @@
+{
+  "check_name": "check_policy_freshness",
+  "control_id": "5.1",
+  "details": {
+    "default_warning_days": 30,
+    "policies_checked": [
+      {
+        "control_id": "5.1",
+        "last_reviewed": "2026-09-12",
+        "next_review_due": "2027-09-12",
+        "owner": "CEO / Management representative",
+        "path": "docs\\policies\\INFORMATION_SECURITY_POLICY.md",
+        "reason": "due in 365 day(s), within review cadence",
+        "status": "PASS"
+      }
+    ]
+  },
+  "evaluated_at": "2026-09-12T12:10:01Z",
+  "evaluated_state_ref": "docs/policies",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 168,
+  "policy_ref": "scripts/evidence/check_policy_freshness.py@037e86d",
+  "previous_manifest": null,
+  "result": "PASS",
+  "run_id": "local-20260912T121001Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}

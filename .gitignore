@@ -26,16 +26,24 @@ override.tf.json
 *_override.tf.json
 .terraformrc
 terraform.rc
+tfplan.out
+*.tfplan
 
-# Evidence artifacts (generated, not source; real evidence lives in the signed vault, not git)
-evidence/*.json
-evidence/*.sig
-!evidence/.gitkeep
+# Evidence artifacts: committed on purpose. There is no real evidence
+# vault (no live AWS account); the signed manifest + signature in this
+# repo IS the evidence that survives after any local infra is torn down.
 
 # Internal-only build tracker, not published
 automated-controls/
+
+# LinkedIn write-ups: personal, not part of the public repo
+docs/linkedin/
 
 # OS / editor cruft
 .DS_Store
 Thumbs.db
 *.swp
+
+# Python bytecode cache
+__pycache__/
+*.pyc

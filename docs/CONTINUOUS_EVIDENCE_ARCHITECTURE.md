@@ -135,8 +135,15 @@ operating effectiveness *over time*, not a point-in-time snapshot.
 ```
 
 Signed as `<manifest>.json` + `<manifest>.json.sig` (Cosign), uploaded to
-`s3://<evidence-vault>/<control_id>/<timestamp>.json`, Object Lock applied
-on write.
+`s3://<evidence-vault>/controls/<section>/<control-id>-<control-slug>/<timestamp>.json`
+(e.g. `controls/governance/5.1-policies-for-information-security/...`),
+Object Lock applied on write. The section matches the #tag grouping in
+[`IMPLEMENTATION_CHECKLIST.md`](IMPLEMENTATION_CHECKLIST.md), not Annex A's
+own 5/6/7/8 numbering, so evidence can be browsed the same way the program
+is built: one section at a time. `scripts/evidence/control_catalog.py` is
+the single source of truth for control-id -> section/slug, kept in sync
+with the checklist. Clause-level evidence (Clause 4-10, if produced) would
+get a parallel `clauses/<clause-id>-<clause-slug>/` prefix instead.
 
 ## Mapping to the Statement of Applicability
 
