@@ -19,9 +19,10 @@ fact.
 4. [`CONTINUOUS_EVIDENCE_ARCHITECTURE.md`](CONTINUOUS_EVIDENCE_ARCHITECTURE.md):
    why point-in-time screenshots fail as evidence, and the signed, scheduled,
    immutable pipeline design that replaces them
-5. [`../automated-controls/AUTOMATABLE_CONTROLS.md`](../automated-controls/AUTOMATABLE_CONTROLS.md):
-   the 40 controls that meet the strict 100%-automatable bar, as a build
-   checklist
+
+There's also a local-only `automated-controls/` build checklist (the 40
+controls that meet the strict 100%-automatable bar), kept out of this repo
+intentionally; it's a working tracker, not something published here.
 
 ## Repo layout (filling in as we build)
 
@@ -37,8 +38,6 @@ iso27001/
 │   ├── vendors/                        # (planned) subprocessor security reviews
 │   ├── runbooks/                       # (planned) operating procedures
 │   └── adr/                            # (planned) architecture decision records
-├── automated-controls/
-│   └── AUTOMATABLE_CONTROLS.md
 ├── terraform/                           # (next) AWS baseline: VPC, KMS, evidence vault, CloudTrail, Config, GuardDuty
 ├── policies/                            # (next) Rego, one file per control cluster, tagged by Annex A control ID
 ├── oscal/                               # (next) component definitions mapping to Annex A

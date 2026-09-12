@@ -32,6 +32,9 @@ evidence/*.json
 evidence/*.sig
 !evidence/.gitkeep
 
+# Internal-only build tracker, not published
+automated-controls/
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db
