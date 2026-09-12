@@ -51,7 +51,7 @@ section.
 
 | Control | Name | Tier | Built | Evidence wired | Notes |
 |---|---|---|---|---|---|
-| 5.1 | Policies for information security | T3→T2 | [ ] | [ ] | Policy doc in `docs/policies/` |
+| 5.1 | Policies for information security | T3→T2 | [x] | [x] | Policy doc + automated freshness check; evidence in `evidence/controls/governance/5.1-.../` |
 | 5.2 | Information security roles and responsibilities | T3 | [ ] | [ ] | RACI in `COMPANY.md` |
 | 5.3 | Segregation of duties | T1 | [ ] | [ ] | IAM/OPA: approver ≠ applier |
 | 5.4 | Management responsibilities | T3 | [ ] | [ ] | Management review minutes in `docs/management-reviews/` |
