@@ -2,54 +2,102 @@
   <img src="assets/banner.svg" alt="Veridian Identity" width="720">
 </p>
 
-# Veridian Identity: ISO 27001 ISMS & Control Automation
+<p align="center">
+  <a href="#"><img src="https://img.shields.io/badge/status-private_beta-2DD4BF?style=flat-square" alt="status"></a>
+  <a href="#"><img src="https://img.shields.io/badge/SOC%202-in%20progress-6366F1?style=flat-square" alt="SOC 2 in progress"></a>
+  <a href="docs/ISO27001_PROGRAM.md"><img src="https://img.shields.io/badge/ISO%2027001-in%20progress-6366F1?style=flat-square" alt="ISO 27001 in progress"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-proprietary-334155?style=flat-square" alt="license"></a>
+</p>
 
-This repo is the ISMS (Information Security Management System) and control
-automation program for **Veridian Identity, Inc.**, built the same way you'd
-grade a GRC engineering capstone: gap by gap, with real Terraform, real
-policy-as-code, real signed evidence. Except this time it's a full
-ISO/IEC 27001:2022 Annex A implementation for a defined company, not a
-training exercise, and it's documented as we go rather than written up
-after the fact.
+<h3 align="center">Identity verification, provably secure.</h3>
 
-## Start here
+<p align="center">
+  Veridian gives fintechs, marketplaces, and banks a single API to verify who<br>
+  their users really are, without building a compliance team to do it.
+</p>
 
-1. [`COMPANY.md`](COMPANY.md): who Veridian is, what it does, why it needs
-   ISO 27001, and why this profile was chosen. **Read this first and correct
-   it if it's wrong.** Everything else keys off this identity.
-2. [`docs/ISMS_SCOPE.md`](docs/ISMS_SCOPE.md): formal ISMS scope (Clause 4.3)
-3. [`docs/STATEMENT_OF_APPLICABILITY.md`](docs/STATEMENT_OF_APPLICABILITY.md):
-   all 93 Annex A controls, applicability, and **automation tier** (T1
-   control-as-code / T2 automated-evidence / T3 documentary)
-4. [`docs/CONTINUOUS_EVIDENCE_ARCHITECTURE.md`](docs/CONTINUOUS_EVIDENCE_ARCHITECTURE.md):
-   why point-in-time screenshots fail as evidence, and the signed, scheduled,
-   immutable pipeline design that replaces them
+---
 
-## Repo layout (filling in as we build)
+## About Veridian
 
+Veridian Identity, Inc. builds `veridian-verify`: an API and dashboard that
+lets businesses confirm a real person is behind a new account before they
+let them in. Upload a government ID, match a live selfie against it, screen
+against sanctions and watchlists, and get a decision back in seconds,
+without ever having to store a government ID yourself.
+
+We started Veridian because every fintech and marketplace we talked to was
+solving the same problem in-house, badly: unencrypted ID photos in a random
+S3 bucket, no retention policy, no idea who on the team could still see
+last year's uploads. Identity verification touches the most sensitive data
+a company holds. We think the company doing that verification should be
+held to a higher bar than the companies asking for it, not a lower one.
+
+## What we do
+
+- **Document capture and verification.** Government ID scan, format and
+  authenticity checks, data extraction.
+- **Liveness and face match.** A live selfie matched against the document
+  photo, resistant to photo/video replay.
+- **Watchlist and sanctions screening.** Continuous screening against
+  global sanctions, PEP, and adverse media lists.
+- **Developer-first API.** One endpoint, a webhook for the result, a
+  dashboard for the humans who need to review edge cases.
+
+```bash
+curl https://api.veridian.dev/v1/verifications \
+  -H "Authorization: Bearer $VERIDIAN_API_KEY" \
+  -F "document=@passport.jpg" \
+  -F "selfie=@selfie.jpg"
 ```
-iso27001/
-├── COMPANY.md                          # who Veridian is
-├── docs/
-│   ├── ISMS_SCOPE.md                   # Clause 4.3 scope
-│   ├── STATEMENT_OF_APPLICABILITY.md   # all 93 controls + automation tier
-│   ├── CONTINUOUS_EVIDENCE_ARCHITECTURE.md
-│   ├── policies/                       # (planned) T3 policy documents
-│   ├── vendors/                        # (planned) subprocessor security reviews
-│   ├── runbooks/                       # (planned) operating procedures
-│   └── adr/                            # (planned) architecture decision records
-├── terraform/                           # (next) AWS baseline: VPC, KMS, evidence vault, CloudTrail, Config, GuardDuty
-├── policies/                            # (next) Rego, one file per control cluster, tagged by Annex A control ID
-├── oscal/                               # (next) component definitions mapping to Annex A
-├── .github/workflows/                   # (next) event-triggered CI gate + scheduled re-attestation
-├── evidence/                            # signed evidence manifests land here (or in a separate AWS account vault)
-└── scripts/                             # verify-evidence.sh and similar
+
+```json
+{
+  "verification_id": "ver_8f21a3c9",
+  "status": "approved",
+  "document": { "type": "passport", "country": "GB" },
+  "checks": {
+    "document_authenticity": "pass",
+    "face_match": "pass",
+    "watchlist_screening": "clear"
+  }
+}
 ```
 
-## Status
+## Why companies choose us
 
-Pre-implementation. Company profile, scope, SoA, and evidence architecture
-are drafted (v0); no Terraform/policy/CI has been written yet. Next step
-per the SoA's build order: the T1 Technological control cluster (8.2 to 8.5,
-8.8 to 8.9, 8.13, 8.15 to 8.17, 8.20 to 8.22, 8.24), starting with the
-Terraform baseline.
+- **Built for the businesses that get audited, not just the ones that
+  should be.** Our customers are banks and regulated fintechs; our own
+  security posture has to clear the same bar theirs does.
+- **We don't keep what we don't need.** Raw ID images and biometric data
+  are processed and discarded on a short, enforced retention window, not
+  kept "just in case."
+- **Nothing we tell an auditor is a claim we can't prove.** Every control
+  we say is in place is backed by evidence our own systems generate
+  automatically, not a document someone wrote once and hoped stayed true.
+
+## Company
+
+| | |
+|---|---|
+| Stage | Early-stage, private beta |
+| Team | Small, fully remote |
+| Customers | B2B: fintechs, marketplaces, and banks embedding our API into their own onboarding |
+| Data we handle | Government ID images, biometric face data, PII, verification decisions |
+| Primary region | EU (`eu-west-1`), reflecting where most of our customers and their users are |
+
+## Security and compliance
+
+Identity verification is a security company first and a product company
+second. Veridian is building toward ISO/IEC 27001 certification with a
+control-automation-first approach: every control that can be enforced and
+proven by code, is, continuously, not just at audit time.
+
+Full program details, control mapping, and the automation architecture
+live in [`docs/ISO27001_PROGRAM.md`](docs/ISO27001_PROGRAM.md).
+
+To report a security issue, see [`SECURITY.md`](SECURITY.md).
+
+## License
+
+Proprietary. All rights reserved, Veridian Identity, Inc.
