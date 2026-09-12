@@ -1,5 +1,12 @@
 # Veridian Identity, Inc.: Company Profile
 
+> **This is a fictional company.** It exists solely to give a full
+> ISO/IEC 27001:2022 Annex A control automation program a realistic subject
+> to build against and prove out. No legal entity, product, employees, or
+> customer data exist behind it. See
+> [`docs/ISO27001_PROGRAM.md`](docs/ISO27001_PROGRAM.md) for the full
+> purpose and scope statement.
+
 ## Why this company, why this shape
 
 You asked for a company "real enough to actually implement ISO 27001

@@ -4,9 +4,32 @@ This repo doubles as Veridian Identity's ISMS (Information Security
 Management System) and control automation program, built the same way
 you'd grade a GRC engineering capstone: gap by gap, with real Terraform,
 real policy-as-code, real signed evidence. Except this time it's a full
-ISO/IEC 27001:2022 Annex A implementation for a real company, not a
-training exercise, documented as we go rather than written up after the
-fact.
+ISO/IEC 27001:2022 Annex A implementation, documented as we go rather than
+written up after the fact.
+
+## Purpose and scope (read this first)
+
+**Veridian Identity is a fictional company.** It exists to give a full
+ISO/IEC 27001:2022 Annex A implementation a concrete, realistic subject to
+be built against, the same way PayVault, Sentinel, and Acme Health gave the
+GRC engineering capstones a subject. There is no legal entity, no product
+code, no employees, no customers, and no real data behind it.
+
+What *is* real, or will be as this repo is built out: the AWS
+infrastructure, the Terraform, the OPA/Rego policies, the CI pipeline, and
+the signed evidence artifacts. The goal of this project is to prove, with
+working code and cryptographically verifiable evidence rather than
+paperwork, which ISO 27001 Annex A controls can be genuinely automated
+(both enforced and evidenced with zero ongoing human action) and to show
+exactly how.
+
+Given that, the practical build focuses on the 40 controls in
+[`../automated-controls/AUTOMATABLE_CONTROLS.md`](../automated-controls/AUTOMATABLE_CONTROLS.md)
+(local-only, see below): those are the ones a real, working AWS sandbox
+account and this repo's pipeline can prove end to end. The remaining T2
+controls depend on real HR/incident/vendor processes that don't exist for
+a fictional company, so they're documented as a pattern (one worked
+example) rather than fully built out.
 
 ## Program documents
 

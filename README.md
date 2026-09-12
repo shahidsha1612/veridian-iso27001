@@ -98,6 +98,16 @@ live in [`docs/ISO27001_PROGRAM.md`](docs/ISO27001_PROGRAM.md).
 
 To report a security issue, see [`SECURITY.md`](SECURITY.md).
 
+## About this repository
+
+Veridian Identity is a fictional company. This repo exists to design and
+build a real, working ISO/IEC 27001:2022 Annex A control automation
+program (real Terraform, real policies, real signed evidence) against a
+realistic subject, the same way a training capstone uses a fictional
+workload. See [`docs/ISO27001_PROGRAM.md`](docs/ISO27001_PROGRAM.md) for
+the full purpose and scope statement. There is no legal entity, product,
+or customer data behind any of it.
+
 ## License
 
 Proprietary. All rights reserved, Veridian Identity, Inc.
