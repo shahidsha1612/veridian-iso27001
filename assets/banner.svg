@@ -1,0 +1,40 @@
+<svg width="1200" height="280" viewBox="0 0 1200 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Veridian Identity">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B1120"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="shieldGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2DD4BF"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="280" rx="24" fill="url(#bgGradient)"/>
+
+  <g transform="translate(60, 40)">
+    <path d="M100 14 L172 44 L172 104 C172 152 142 178 100 190 C58 178 28 152 28 104 L28 44 Z"
+          fill="url(#shieldGradient2)"/>
+    <path d="M62 100 L90 128 L142 66" fill="none" stroke="#0B1120" stroke-width="14"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M62 100 L90 128 L142 66" fill="none" stroke="#F8FAFC" stroke-width="8"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <text x="330" y="140" font-family="Verdana, Geneva, sans-serif" font-size="64"
+        font-weight="700" fill="#F8FAFC" letter-spacing="2">VERIDIAN</text>
+  <text x="333" y="178" font-family="Verdana, Geneva, sans-serif" font-size="26"
+        font-weight="400" fill="#2DD4BF" letter-spacing="6">IDENTITY</text>
+  <text x="333" y="220" font-family="Verdana, Geneva, sans-serif" font-size="20"
+        font-weight="400" fill="#94A3B8">Identity verification, provably secure.</text>
+
+  <g transform="translate(920, 60)" font-family="Verdana, Geneva, sans-serif" fill="#64748B" font-size="14">
+    <rect x="0" y="0" width="220" height="160" rx="12" fill="#0F172A" stroke="#1E293B"/>
+    <text x="20" y="34" fill="#2DD4BF" font-weight="700" font-size="16">ISO 27001</text>
+    <text x="20" y="58" font-size="13">Annex A automation</text>
+    <line x1="20" y1="72" x2="200" y2="72" stroke="#1E293B"/>
+    <text x="20" y="96" font-size="13">Continuous evidence,</text>
+    <text x="20" y="114" font-size="13">signed and verifiable</text>
+    <text x="20" y="140" font-size="13" fill="#475569">not a screenshot.</text>
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Veridian Identity mark">
+  <defs>
+    <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2DD4BF"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+  </defs>
+  <path d="M100 14 L172 44 L172 104 C172 152 142 178 100 190 C58 178 28 152 28 104 L28 44 Z"
+        fill="url(#shieldGradient)"/>
+  <path d="M100 14 L172 44 L172 104 C172 152 142 178 100 190 C58 178 28 152 28 104 L28 44 Z"
+        fill="none" stroke="#0B1120" stroke-opacity="0.15" stroke-width="3"/>
+  <path d="M62 100 L90 128 L142 66" fill="none" stroke="#0B1120" stroke-width="14"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M62 100 L90 128 L142 66" fill="none" stroke="#F8FAFC" stroke-width="8"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

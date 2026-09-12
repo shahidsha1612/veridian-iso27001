@@ -1,0 +1,38 @@
+# Secrets / credentials: never commit these
+*.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+**/credentials
+**/credentials.json
+*_rsa
+*_rsa.pub
+.aws/
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# Evidence artifacts (generated, not source; real evidence lives in the signed vault, not git)
+evidence/*.json
+evidence/*.sig
+!evidence/.gitkeep
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
