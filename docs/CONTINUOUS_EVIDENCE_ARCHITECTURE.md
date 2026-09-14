@@ -150,7 +150,10 @@ get a parallel `clauses/<clause-id>-<clause-slug>/` prefix instead.
 Every T1 and T2 row in
 [`STATEMENT_OF_APPLICABILITY.md`](STATEMENT_OF_APPLICABILITY.md) gets one or
 more entries in this pipeline. T3 rows get a lighter version: a dated
-document plus a calendar reminder, tracked in `docs/policies/`. The goal
+document plus a calendar reminder, tracked in `docs/controls/<section>/`
+(one file per control, e.g.
+`docs/controls/governance/A.5.1-policies-for-information-security.md`).
+The goal
 over time is to shrink the T3 column by finding a system-of-record API for
 each one (e.g., once an HRIS is chosen, 6.1/6.2/6.5/6.6 move from wherever
 they start toward T2).

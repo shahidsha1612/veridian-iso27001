@@ -11,15 +11,27 @@ variable "aws_profile" {
 }
 
 variable "evidence_account_id" {
-  description = "AWS account ID of the dedicated evidence-vault account (037048679942, provisioned 2026-09-12)."
+  description = <<-EOT
+    AWS account ID of the dedicated evidence-vault account. Migrated
+    2026-09-14 to 699575760023 (IAM user terraform-lab) after the
+    original bootstrap account's key (tf-bootstrap-evidence,
+    037048679942) came back InvalidClientTokenId -- deleted/deactivated,
+    not just a stale local credential.
+  EOT
   type        = string
-  default     = "037048679942"
+  default     = "699575760023"
 }
 
 variable "bucket_name" {
-  description = "Evidence vault bucket name. Must be globally unique in S3."
+  description = <<-EOT
+    Evidence vault bucket name. Must be globally unique in S3 (unique
+    across all AWS accounts, not just this one). The original name
+    (veridian-iso27001-evidence-vault) is still claimed by the old,
+    now-unreachable evidence account (037048679942); this account's own
+    ID is appended to guarantee no collision.
+  EOT
   type        = string
-  default     = "veridian-iso27001-evidence-vault"
+  default     = "veridian-iso27001-evidence-vault-699575760023"
 }
 
 variable "object_lock_retention_days" {

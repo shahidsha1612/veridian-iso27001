@@ -1,25 +1,33 @@
 #!/usr/bin/env python3
 """
-Control: 5.1 (and reusable for any other T3 policy doc with the same
-frontmatter shape). Scans every *.md file in a policies directory,
-reads its frontmatter, and fails any whose `next_review_due` has passed.
+Reusable T3-evidence check for any policy/RACI/register doc that carries
+the shared frontmatter shape (control_id, last_reviewed,
+review_cadence_months, next_review_due). Scans every *.md file under
+docs/controls/<section>/ (one file per control, e.g.
+docs/controls/governance/A.5.1-policies-for-information-security.md),
+reads its frontmatter, and fails any whose `next_review_due` has
+passed.
 
 This is the "automated" half of a T3 control: it can't verify the
 *content* of a review happened, but it can prove, on a schedule and
-without a human remembering, that nobody let a policy go silently stale.
+without a human remembering, that nobody let a document go silently
+stale.
 
 Three-state result, not just pass/fail, so there's an actual chance to
-act before a policy lapses instead of only finding out after:
+act before a document lapses instead of only finding out after:
   - PASS: more than `review_warning_days` days before next_review_due
   - WARN: within `review_warning_days` days of next_review_due (default 30)
   - FAIL: next_review_due has passed, or frontmatter is missing/invalid
 
 Usage:
-    python scripts/evidence/check_policy_freshness.py [--dir docs/policies]
+    python scripts/evidence/check_policy_freshness.py \
+        [--dir docs/controls] [--file docs/some-other-doc.md]
 
-Exit code 0 if every policy is PASS, 2 if any is WARN (not overdue yet,
-but flag it), 1 if any is FAIL. Always writes one signed evidence
-manifest per control_id found, whatever the result.
+One signed evidence manifest is written per distinct control_id found
+(not one manifest for the whole scan), since each control_id is a
+separate control in the Statement of Applicability and needs its own
+evidence trail. Exit code 0 if every document is PASS, 2 if any is WARN
+(not overdue yet, but flag it), 1 if any is FAIL.
 """
 
 from __future__ import annotations
@@ -95,16 +103,31 @@ def check_one(path: Path, today: date) -> dict:
     }
 
 
+DEFAULT_DIRS = ["docs/controls"]
+DEFAULT_FILES: list[str] = []
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dir", default="docs/policies")
+    parser.add_argument("--dir", action="append", default=None, help="directory to glob *.md from (repeatable)")
+    parser.add_argument("--file", action="append", default=None, help="single file to check (repeatable)")
     args = parser.parse_args()
 
-    policies_dir = REPO_ROOT / args.dir
-    files = sorted(policies_dir.glob("*.md")) if policies_dir.exists() else []
+    dirs = args.dir if args.dir is not None else DEFAULT_DIRS
+    extra_files = args.file if args.file is not None else DEFAULT_FILES
+
+    files: list[Path] = []
+    for d in dirs:
+        policies_dir = REPO_ROOT / d
+        if policies_dir.exists():
+            files.extend(sorted(policies_dir.rglob("*.md")))
+    for f in extra_files:
+        file_path = REPO_ROOT / f
+        if file_path.exists():
+            files.append(file_path)
 
     if not files:
-        print(f"no policy files found under {policies_dir}", file=sys.stderr)
+        print(f"no policy files found under {dirs} or {extra_files}", file=sys.stderr)
         return 1
 
     today = date.today()
@@ -114,20 +137,27 @@ def main() -> int:
         marker = {"PASS": "OK  ", "WARN": "WARN", "FAIL": "FAIL"}[r["status"]]
         print(f"[{marker}] {r['control_id']:>6}  {r['path']}  ({r['reason']})")
 
-    overall_status = max((r["status"] for r in results), key=STATUS_RANK.get)
+    by_control: dict[str, list[dict]] = {}
+    for r in results:
+        by_control.setdefault(r["control_id"], []).append(r)
 
-    manifest = build_manifest(
-        control_id="5.1",
-        check_name="check_policy_freshness",
-        result=overall_status,
-        evaluated_state_ref=str(args.dir),
-        freshness_sla_hours=24 * 7,  # checked weekly once scheduled
-        details={"policies_checked": results, "default_warning_days": DEFAULT_WARNING_DAYS},
-    )
-    manifest_path = write_manifest(manifest)
-    print(f"evidence written: {manifest_path.relative_to(REPO_ROOT)} (overall: {overall_status})")
+    worst_overall = "PASS"
+    for control_id, control_results in sorted(by_control.items()):
+        control_status = max((r["status"] for r in control_results), key=STATUS_RANK.get)
+        worst_overall = max(worst_overall, control_status, key=STATUS_RANK.get)
 
-    return {"PASS": 0, "WARN": 2, "FAIL": 1}[overall_status]
+        manifest = build_manifest(
+            control_id=control_id,
+            check_name="check_policy_freshness",
+            result=control_status,
+            evaluated_state_ref=", ".join(sorted({r["path"] for r in control_results})),
+            freshness_sla_hours=24 * 7,  # checked weekly once scheduled
+            details={"policies_checked": control_results, "default_warning_days": DEFAULT_WARNING_DAYS},
+        )
+        manifest_path = write_manifest(manifest)
+        print(f"evidence written: {manifest_path.relative_to(REPO_ROOT)} (control {control_id}: {control_status})")
+
+    return {"PASS": 0, "WARN": 2, "FAIL": 1}[worst_overall]
 
 
 if __name__ == "__main__":

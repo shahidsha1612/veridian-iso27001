@@ -51,9 +51,9 @@ section.
 
 | Control | Name | Tier | Built | Evidence wired | Notes |
 |---|---|---|---|---|---|
-| 5.1 | Policies for information security | T3→T2 | [x] | [x] | Policy doc + automated freshness check; evidence in `evidence/controls/governance/5.1-.../` |
-| 5.2 | Information security roles and responsibilities | T3 | [ ] | [ ] | RACI in `COMPANY.md` |
-| 5.3 | Segregation of duties | T1 | [ ] | [ ] | IAM/OPA: approver ≠ applier |
+| 5.1 | Policies for information security | T3→T2 | [x] | [x] | Policy doc in `docs/controls/governance/A.5.1-...md` + automated freshness check; evidence in `evidence/controls/governance/5.1-.../` |
+| 5.2 | Information security roles and responsibilities | T3 | [x] | [x] | RACI matrix in `docs/controls/governance/A.5.2-...md`, linked from `COMPANY.md`; freshness-checked by the same script as 5.1, evidence in `evidence/controls/governance/5.2-.../` |
+| 5.3 | Segregation of duties | T1 | [x] | [x] | Terraform IAM role split (not yet applied, no AWS account) + OPA policy/tests + CI gate with bot auto-approval + live branch protection; evidence in `evidence/controls/governance/5.3-.../`; see `docs/controls/governance/A.5.3-...md` |
 | 5.4 | Management responsibilities | T3 | [ ] | [ ] | Management review minutes in `docs/management-reviews/` |
 | 5.5 | Contact with authorities | T3 | [ ] | [ ] | Authority contact list + trigger criteria |
 | 5.6 | Contact with special interest groups | T3 | [ ] | [ ] | Membership record |
