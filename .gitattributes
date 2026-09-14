@@ -16,3 +16,9 @@ docs/** filter=git-crypt diff=git-crypt
 terraform/** filter=git-crypt diff=git-crypt
 policies/** filter=git-crypt diff=git-crypt
 scripts/** filter=git-crypt diff=git-crypt
+
+# Exception: the cosign PUBLIC key is meant to be public -- it's how
+# anyone (an auditor, a curious visitor) independently verifies a
+# signed evidence record without needing the git-crypt key at all.
+# Encrypting it would defeat evidence architecture principle 6.
+scripts/evidence/.keys/local-dev.pub -filter -diff
