@@ -1,1 +1,6 @@
 budget_alert_email = "you@example.com"
+
+# Uncomment and adjust if the module defaults don't match your account:
+# bucket_name                = "your-globally-unique-bucket-name"
+# object_lock_retention_days = 1    # lab/demo: short-lived, plain delete when done
+#                                   # 2555 (~7yr): realistic production retention (5.33)

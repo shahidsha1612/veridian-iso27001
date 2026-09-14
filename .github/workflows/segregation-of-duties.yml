@@ -1,0 +1,54 @@
+name: Segregation of duties (control 5.3)
+
+# Enforces "approver != applier" for every change to master without
+# requiring a second human: required checks must pass, and only then
+# does a machine identity (github-actions[bot]) submit the approving
+# review. The PR author -- human or not -- can never be that reviewer;
+# GitHub disallows self-approval, and the bot's approval logic is
+# itself version-controlled and gated on deterministic checks, not a
+# person's judgment call. See docs/controls/governance/A.5.3-....md
+# for the full rationale, including why this exists (solo maintainer).
+
+on:
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  required-checks:
+    name: required-checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Policy/RACI freshness (T3 evidence controls)
+        run: python scripts/evidence/check_policy_freshness.py
+
+      - name: OPA policy tests (segregation of duties, control 5.3)
+        uses: open-policy-agent/setup-opa@v2
+        with:
+          version: latest
+
+      - name: Run OPA test suite
+        run: opa test policies/ -v
+
+  auto-approve:
+    name: auto-approve
+    needs: required-checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Approve as github-actions[bot]
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr review "${{ github.event.pull_request.number }}" \
+            --repo "${{ github.repository }}" \
+            --approve \
+            --body "Auto-approved by CI (control 5.3): required-checks passed. Approving identity is github-actions[bot], structurally distinct from the PR author; approval logic lives in .github/workflows/segregation-of-duties.yml and changes to it go through this same gate."

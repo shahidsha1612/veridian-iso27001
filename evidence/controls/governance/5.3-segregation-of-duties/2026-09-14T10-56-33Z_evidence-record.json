@@ -1,0 +1,33 @@
+{
+  "check_name": "check_segregation_of_duties",
+  "control_id": "5.3",
+  "details": {
+    "checks": [
+      {
+        "check": "opa_unit_tests",
+        "reason": "PASS: 4/4",
+        "status": "PASS"
+      },
+      {
+        "check": "opa_live_snapshot",
+        "reason": "no segregation-of-duties violations in the IAM role snapshot (2 distinct roles, plan role read-only, apply role cannot self-escalate)",
+        "status": "PASS"
+      },
+      {
+        "check": "branch_protection",
+        "reason": "master requires 1 approving review(s), enforced for admins, gated on required check 'required-checks', no force-push/deletion allowed",
+        "status": "PASS"
+      }
+    ]
+  },
+  "evaluated_at": "2026-09-14T10:56:33Z",
+  "evaluated_state_ref": "policies/segregation_of_duties.rego, github:shahidsha1612/veridian-iso27001@branch:master/protection",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 24,
+  "policy_ref": "scripts/evidence/check_segregation_of_duties.py@b541f92",
+  "previous_manifest": null,
+  "result": "PASS",
+  "run_id": "local-20260914T105633Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}

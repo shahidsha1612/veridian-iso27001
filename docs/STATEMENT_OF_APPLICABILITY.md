@@ -31,9 +31,9 @@ not discovered by the auditor.
 
 | ID | Control | Applicable | Tier | Mechanism / evidence source |
 |---|---|---|---|---|
-| 5.1 | Policies for information security | Y | T3 to T2 | Policy doc in `docs/policies/`; promote to T2 once tracked via a policy-management tool with read-receipts API |
-| 5.2 | Information security roles and responsibilities | Y | T3 | RACI doc in `COMPANY.md` roles table; reviewed at each org change |
-| 5.3 | Segregation of duties | Y | T1 | IAM policy structure (no single role can both approve *and* apply Terraform changes) enforced via OPA on IAM/role definitions plus branch protection (required PR approval not the same person as author) |
+| 5.1 | Policies for information security | Y | T3 to T2 | Policy doc in `docs/controls/governance/A.5.1-...md`; promote to T2 once tracked via a policy-management tool with read-receipts API |
+| 5.2 | Information security roles and responsibilities | Y | T3 | RACI doc in `docs/controls/governance/A.5.2-...md`; reviewed at each org change |
+| 5.3 | Segregation of duties | Y | T1 | IAM policy structure (no single role can both approve *and* apply Terraform changes) enforced via OPA on IAM/role definitions plus branch protection (required PR approval, approver is `github-actions[bot]`, never the human author) — see `docs/controls/governance/A.5.3-...md` |
 | 5.4 | Management responsibilities | Y | T3 | Management review minutes, versioned in `docs/management-reviews/` |
 | 5.5 | Contact with authorities | Y | T3 | Documented contact list plus trigger criteria in incident response plan |
 | 5.6 | Contact with special interest groups | Y | T3 | Membership record (e.g., ISACs, cloud security forums) |

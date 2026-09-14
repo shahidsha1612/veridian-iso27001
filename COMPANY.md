@@ -66,6 +66,10 @@ key off this identity.
 | Engineering | (placeholder, future hires) | Subject to SDLC controls (8.25 to 8.34), access controls (8.2 to 8.4) |
 | Everyone (once hired) | (placeholder) | People controls (6.1 to 6.8): screening, training, NDAs |
 
+Full RACI matrix (who's Responsible/Accountable/Consulted/Informed per
+control domain), control 5.2, lives in
+[`docs/controls/governance/A.5.2-information-security-roles-and-responsibilities.md`](docs/controls/governance/A.5.2-information-security-roles-and-responsibilities.md).
+
 ## What this repo is going to contain, built incrementally
 
 1. `docs/ISMS_SCOPE.md`: formal scope statement (Clause 4.3)

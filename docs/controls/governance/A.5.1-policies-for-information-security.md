@@ -16,21 +16,21 @@ This policy states Veridian Identity's commitment to protecting the
 confidentiality, integrity, and availability of the information it
 processes on behalf of itself and its customers, in support of the
 ISO/IEC 27001:2022 ISMS defined in
-[`ISMS_SCOPE.md`](../ISMS_SCOPE.md).
+[`ISMS_SCOPE.md`](../../ISMS_SCOPE.md).
 
 ## Scope
 
 Applies to all systems, data, and personnel within the ISMS scope: the
 `veridian-verify` product, its supporting AWS infrastructure, and
 everyone with access to RESTRICTED or CONFIDENTIAL data as classified in
-[`COMPANY.md`](../../COMPANY.md).
+[`COMPANY.md`](../../../COMPANY.md).
 
 ## Policy statements
 
 1. Information security objectives are set and reviewed at least
    annually by management (Clause 6.2, 9.3).
 2. Every Annex A control's applicability and implementation is recorded
-   in the [Statement of Applicability](../STATEMENT_OF_APPLICABILITY.md)
+   in the [Statement of Applicability](../../STATEMENT_OF_APPLICABILITY.md)
    and kept current as the system changes.
 3. Controls are implemented as code wherever a control-as-code mechanism
    exists (Tier 1); where it doesn't, they are implemented as a
@@ -40,17 +40,18 @@ everyone with access to RESTRICTED or CONFIDENTIAL data as classified in
 5. Non-conformities are tracked and corrected per Clause 10.1; repeat
    non-conformities trigger a policy or control redesign, not just
    another fix.
-6. This policy, and every subordinate policy in `docs/policies/`, is
-   reviewed at the cadence declared in its frontmatter
+6. This policy, and every other control document under `docs/controls/`,
+   is reviewed at the cadence declared in its frontmatter
    (`review_cadence_months`) and re-dated on every review, whether or
    not content changed.
 
 ## Enforcement
 
 Reviewed on a fixed cadence rather than left to expire silently: see
-[`docs/IMPLEMENTATION_CHECKLIST.md`](../IMPLEMENTATION_CHECKLIST.md) for
+[`docs/IMPLEMENTATION_CHECKLIST.md`](../../IMPLEMENTATION_CHECKLIST.md) for
 the automation that checks `next_review_due` on a schedule and raises a
-finding if this document (or any policy in this directory) goes stale.
+finding if this document (or any control doc under `docs/controls/`)
+goes stale.
 
 ## Version history
 

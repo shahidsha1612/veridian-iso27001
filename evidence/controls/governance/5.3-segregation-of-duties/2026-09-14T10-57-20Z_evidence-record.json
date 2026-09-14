@@ -1,0 +1,28 @@
+{
+  "check_name": "check_policy_freshness",
+  "control_id": "5.3",
+  "details": {
+    "default_warning_days": 30,
+    "policies_checked": [
+      {
+        "control_id": "5.3",
+        "last_reviewed": "2026-09-14",
+        "next_review_due": "2027-03-14",
+        "owner": "GRC/Security engineer",
+        "path": "docs\\controls\\governance\\A.5.3-segregation-of-duties.md",
+        "reason": "due in 181 day(s), within review cadence",
+        "status": "PASS"
+      }
+    ]
+  },
+  "evaluated_at": "2026-09-14T10:57:20Z",
+  "evaluated_state_ref": "docs\\controls\\governance\\A.5.3-segregation-of-duties.md",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 168,
+  "policy_ref": "scripts/evidence/check_policy_freshness.py@b541f92",
+  "previous_manifest": "evidence\\controls\\governance\\5.3-segregation-of-duties\\2026-09-14T10-56-33Z_evidence-record.json",
+  "result": "PASS",
+  "run_id": "local-20260914T105720Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}
