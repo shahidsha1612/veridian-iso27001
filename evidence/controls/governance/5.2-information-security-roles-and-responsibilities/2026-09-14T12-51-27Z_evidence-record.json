@@ -1,0 +1,28 @@
+{
+  "check_name": "check_policy_freshness",
+  "control_id": "5.2",
+  "details": {
+    "default_warning_days": 30,
+    "policies_checked": [
+      {
+        "control_id": "5.2",
+        "last_reviewed": "2026-09-14",
+        "next_review_due": "2027-03-14",
+        "owner": "CEO / Management representative",
+        "path": "docs\\controls\\governance\\A.5.2-information-security-roles-and-responsibilities.md",
+        "reason": "due in 181 day(s), within review cadence",
+        "status": "PASS"
+      }
+    ]
+  },
+  "evaluated_at": "2026-09-14T12:51:27Z",
+  "evaluated_state_ref": "docs\\controls\\governance\\A.5.2-information-security-roles-and-responsibilities.md",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 168,
+  "policy_ref": "scripts/evidence/check_policy_freshness.py@8edcc10",
+  "previous_manifest": "evidence\\controls\\governance\\5.2-information-security-roles-and-responsibilities\\2026-09-14T12-24-19Z_evidence-record.json",
+  "result": "PASS",
+  "run_id": "local-20260914T125127Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}

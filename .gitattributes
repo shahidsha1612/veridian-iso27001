@@ -1,0 +1,24 @@
+# git-crypt: everything matched here is stored encrypted in git.
+# Readable only by whoever has the key (kept locally, outside this repo,
+# at ~/.git-crypt-keys/veridian-iso27001.key; shared directly with an
+# auditor if/when needed for a real audit, per COMPANY.md).
+#
+# Deliberately NOT encrypted:
+#   - evidence/**            the actual proof; meant to be public
+#   - .github/workflows/**   GitHub Actions reads these directly to run
+#                            CI; encrypting them breaks CI entirely
+#   - .github/ISSUE_TEMPLATE/**, .github/PULL_REQUEST_TEMPLATE.md
+#                            GitHub reads these directly for its own UI
+#   - README.md, LICENSE, SECURITY.md   public front door
+
+COMPANY.md filter=git-crypt diff=git-crypt
+docs/** filter=git-crypt diff=git-crypt
+terraform/** filter=git-crypt diff=git-crypt
+policies/** filter=git-crypt diff=git-crypt
+scripts/** filter=git-crypt diff=git-crypt
+
+# Exception: the cosign PUBLIC key is meant to be public -- it's how
+# anyone (an auditor, a curious visitor) independently verifies a
+# signed evidence record without needing the git-crypt key at all.
+# Encrypting it would defeat evidence architecture principle 6.
+scripts/evidence/.keys/local-dev.pub -filter -diff
