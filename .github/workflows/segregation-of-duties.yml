@@ -24,6 +24,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # docs/, policies/, scripts/, terraform/, and COMPANY.md are stored
+      # encrypted (git-crypt) -- see .gitattributes. Without this step,
+      # actions/checkout leaves those files as raw ciphertext on the
+      # runner and every step below would fail reading them.
+      - name: Unlock git-crypt
+        env:
+          GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y git-crypt
+          echo "$GIT_CRYPT_KEY" | base64 -d > /tmp/git-crypt-key
+          git-crypt unlock /tmp/git-crypt-key
+          rm -f /tmp/git-crypt-key
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
