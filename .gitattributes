@@ -1,0 +1,18 @@
+# git-crypt: everything matched here is stored encrypted in git.
+# Readable only by whoever has the key (kept locally, outside this repo,
+# at ~/.git-crypt-keys/veridian-iso27001.key; shared directly with an
+# auditor if/when needed for a real audit, per COMPANY.md).
+#
+# Deliberately NOT encrypted:
+#   - evidence/**            the actual proof; meant to be public
+#   - .github/workflows/**   GitHub Actions reads these directly to run
+#                            CI; encrypting them breaks CI entirely
+#   - .github/ISSUE_TEMPLATE/**, .github/PULL_REQUEST_TEMPLATE.md
+#                            GitHub reads these directly for its own UI
+#   - README.md, LICENSE, SECURITY.md   public front door
+
+COMPANY.md filter=git-crypt diff=git-crypt
+docs/** filter=git-crypt diff=git-crypt
+terraform/** filter=git-crypt diff=git-crypt
+policies/** filter=git-crypt diff=git-crypt
+scripts/** filter=git-crypt diff=git-crypt
