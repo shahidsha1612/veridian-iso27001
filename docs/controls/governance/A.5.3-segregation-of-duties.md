@@ -29,8 +29,8 @@ GitHub also shows exactly one collaborator on this repo. Classic
 doesn't apply when there's only one person. The honest options were:
 
 1. Require human PR approval and lock the owner out of merging their
-   own work (self-approval is impossible on GitHub) — unworkable.
-2. Require human PR approval but let admins bypass it — technically
+   own work (self-approval is impossible on GitHub) - unworkable.
+2. Require human PR approval but let admins bypass it - technically
    "on," but toothless, since the one person who needs separating from
    themselves can just bypass the requirement. Evidence theater.
 3. **Make the approving identity a machine, not a second human**, and
@@ -49,11 +49,10 @@ static long-lived AWS keys anywhere, control 5.17):
 
 - **`gha-terraform-plan`**: assumable on *any* ref (every pull request
   run, before human review). Attached policy is read-only
-  (`ReadOnlyAccess`) — it can show a reviewer what would change, but
+  (`ReadOnlyAccess`) - it can show a reviewer what would change, but
   cannot change anything.
 - **`gha-terraform-apply`**: assumable *only* when the OIDC token's
-  `sub` claim is `repo:shahidsha1612/veridian-iso27001:ref:refs/heads/master`
-  — i.e. only after a PR has already been merged. Its inline policy
+  `sub` claim is `repo:shahidsha1612/veridian-iso27001:ref:refs/heads/master` - i.e. only after a PR has already been merged. Its inline policy
   explicitly denies `iam:PutRolePolicy` / `AttachRolePolicy` /
   `CreatePolicyVersion` / `UpdateAssumeRolePolicy` on both roles, so it
   can build infrastructure but can never rewrite either role's own
@@ -82,7 +81,7 @@ encodes three invariants over a JSON snapshot of IAM role definitions:
 [`policies/segregation_of_duties_test.rego`](../../../policies/segregation_of_duties_test.rego)
 proves the policy actually catches violations (4/4 tests: a clean
 input, a plan role with a write action, an apply role that
-self-escalates, and a single collapsed role — each denied as
+self-escalates, and a single collapsed role - each denied as
 expected), not just that it exists.
 
 ### 3. CI gate + machine approver
@@ -93,7 +92,7 @@ runs on every PR into `master`:
 - `required-checks` job: runs the T3 policy-freshness check and the
   full OPA test suite (`opa test policies/ -v`).
 - `auto-approve` job: only if `required-checks` succeeds, submits an
-  **approving review as `github-actions[bot]`** — a machine identity
+  **approving review as `github-actions[bot]`** - a machine identity
   structurally distinct from any human author. Its approval logic is
   itself version-controlled and only changeable through this same
   gate.

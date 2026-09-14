@@ -1,0 +1,30 @@
+{
+  "check_name": "check_project_management_security_review",
+  "control_id": "5.8",
+  "details": {
+    "checks": [
+      {
+        "adoption_date": "2026-09-14T13:34:46+01:00",
+        "check": "issues",
+        "reason": "no project issues opened since template adoption (2026-09-14T13:34:46+01:00); nothing to evaluate yet",
+        "status": "PASS"
+      },
+      {
+        "adoption_date": "2026-09-14T13:34:46+01:00",
+        "check": "pull_requests",
+        "reason": "no PRs opened since template adoption (2026-09-14T13:34:46+01:00); nothing to evaluate yet",
+        "status": "PASS"
+      }
+    ]
+  },
+  "evaluated_at": "2026-09-14T12:35:13Z",
+  "evaluated_state_ref": "github:shahidsha1612/veridian-iso27001 issues(label=project) + pull requests, since each template's adoption date",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 168,
+  "policy_ref": "scripts/evidence/check_project_management_security_review.py@1ede1b9",
+  "previous_manifest": "evidence\\controls\\governance\\5.8-information-security-in-project-management\\2026-09-14T12-33-37Z_evidence-record.json",
+  "result": "PASS",
+  "run_id": "local-20260914T123513Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}

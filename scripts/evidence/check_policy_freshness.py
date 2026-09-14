@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """
-Reusable T3-evidence check for any policy/RACI/register doc that carries
-the shared frontmatter shape (control_id, last_reviewed,
+Reusable T3-evidence check for any policy/RACI/register/minutes doc
+that carries the shared frontmatter shape (control_id, last_reviewed,
 review_cadence_months, next_review_due). Scans every *.md file under
 docs/controls/<section>/ (one file per control, e.g.
-docs/controls/governance/A.5.1-policies-for-information-security.md),
+docs/controls/governance/A.5.1-policies-for-information-security.md)
+and docs/management-reviews/ (one file per review meeting, all tagged
+with the same control_id -- see build_manifest's by-control grouping),
 reads its frontmatter, and fails any whose `next_review_due` has
 passed.
 
@@ -103,7 +105,7 @@ def check_one(path: Path, today: date) -> dict:
     }
 
 
-DEFAULT_DIRS = ["docs/controls"]
+DEFAULT_DIRS = ["docs/controls", "docs/management-reviews"]
 DEFAULT_FILES: list[str] = []
 
 

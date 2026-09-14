@@ -29,7 +29,7 @@ section.
 
 | # | Section | Controls | Status |
 |---|---|---|---|
-| 1 | [Governance](#1-governance) | 7 | Not started |
+| 1 | [Governance](#1-governance) | 7 | Done |
 | 2 | [Identity and access management](#2-identity-and-access-management) | 8 | Not started |
 | 3 | [Asset management](#3-asset-management) | 6 | Not started |
 | 4 | [Information protection](#4-information-protection) | 8 | Not started |
@@ -54,10 +54,10 @@ section.
 | 5.1 | Policies for information security | T3→T2 | [x] | [x] | Policy doc in `docs/controls/governance/A.5.1-...md` + automated freshness check; evidence in `evidence/controls/governance/5.1-.../` |
 | 5.2 | Information security roles and responsibilities | T3 | [x] | [x] | RACI matrix in `docs/controls/governance/A.5.2-...md`, linked from `COMPANY.md`; freshness-checked by the same script as 5.1, evidence in `evidence/controls/governance/5.2-.../` |
 | 5.3 | Segregation of duties | T1 | [x] | [x] | Terraform IAM role split (not yet applied, no AWS account) + OPA policy/tests + CI gate with bot auto-approval + live branch protection; evidence in `evidence/controls/governance/5.3-.../`; see `docs/controls/governance/A.5.3-...md` |
-| 5.4 | Management responsibilities | T3 | [ ] | [ ] | Management review minutes in `docs/management-reviews/` |
-| 5.5 | Contact with authorities | T3 | [ ] | [ ] | Authority contact list + trigger criteria |
-| 5.6 | Contact with special interest groups | T3 | [ ] | [ ] | Membership record |
-| 5.8 | Information security in project management | T2 | [ ] | [ ] | PR template security-review checkbox |
+| 5.4 | Management responsibilities | T3 | [x] | [x] | Management review minutes in `docs/management-reviews/`; control doc in `docs/controls/governance/A.5.4-...md`; evidence in `evidence/controls/governance/5.4-.../` |
+| 5.5 | Contact with authorities | T3 | [x] | [x] | Authority contact list + trigger criteria in `docs/controls/governance/A.5.5-...md`; evidence in `evidence/controls/governance/5.5-.../` |
+| 5.6 | Contact with special interest groups | T3 | [x] | [x] | Membership record in `docs/controls/governance/A.5.6-...md`; evidence in `evidence/controls/governance/5.6-.../` |
+| 5.8 | Information security in project management | T2 | [x] | [x] | Issue form (kickoff) + PR template (delivery) + GitHub API evidence pull; see `docs/controls/governance/A.5.8-...md`; evidence in `evidence/controls/governance/5.8-.../` |
 
 **LinkedIn write-up:** [ ] `docs/linkedin/01-governance.md`
 
@@ -125,18 +125,18 @@ home-working environments and company-issued endpoints per
 
 | Control | Name | Tier | Built | Evidence wired | Notes |
 |---|---|---|---|---|---|
-| 7.1 | Physical security perimeters | N/A | — | — | AWS data center, covered by AWS certs (5.19) |
-| 7.2 | Physical entry | N/A | — | — | Same as 7.1 |
-| 7.3 | Securing offices, rooms and facilities | N/A | — | — | Same as 7.1 |
-| 7.4 | Physical security monitoring | N/A | — | — | Same as 7.1 |
-| 7.5 | Protecting against physical and environmental threats | N/A | — | — | Same as 7.1 |
-| 7.6 | Working in secure areas | N/A | — | — | No secure area designated |
+| 7.1 | Physical security perimeters | N/A | - | - | AWS data center, covered by AWS certs (5.19) |
+| 7.2 | Physical entry | N/A | - | - | Same as 7.1 |
+| 7.3 | Securing offices, rooms and facilities | N/A | - | - | Same as 7.1 |
+| 7.4 | Physical security monitoring | N/A | - | - | Same as 7.1 |
+| 7.5 | Protecting against physical and environmental threats | N/A | - | - | Same as 7.1 |
+| 7.6 | Working in secure areas | N/A | - | - | No secure area designated |
 | 7.7 | Clear desk and clear screen | T2 | [ ] | [ ] | MDM auto-lock timeout status |
 | 7.8 | Equipment siting and protection | T3 | [ ] | [ ] | Remote-work policy |
 | 7.9 | Security of assets off-premises | T2 | [ ] | [ ] | MDM encryption + remote-wipe status |
 | 7.10 | Storage media | T1 | [ ] | [ ] | No removable media (MDM), no local persistence (S3 lifecycle) |
-| 7.11 | Supporting utilities | N/A | — | — | Cloud provider responsibility |
-| 7.12 | Cabling security | N/A | — | — | Cloud provider responsibility |
+| 7.11 | Supporting utilities | N/A | - | - | Cloud provider responsibility |
+| 7.12 | Cabling security | N/A | - | - | Cloud provider responsibility |
 | 7.13 | Equipment maintenance | T2 | [ ] | [ ] | MDM OS/patch-level status |
 | 7.14 | Secure disposal or re-use of equipment | T2 | [ ] | [ ] | MDM remote-wipe confirmation, tied to 6.5 |
 
