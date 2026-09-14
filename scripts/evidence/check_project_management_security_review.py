@@ -57,6 +57,18 @@ def _run(cmd: list[str]) -> subprocess.CompletedProcess:
     return subprocess.run(cmd, capture_output=True, text=True, cwd=REPO_ROOT)
 
 
+def _parse_iso(ts: str) -> datetime:
+    """
+    Parses an ISO 8601 timestamp into an aware datetime, regardless of
+    whether it uses a 'Z' suffix (GitHub API) or a numeric offset like
+    '+01:00' (git log %aI, in the committer's local timezone). Comparing
+    these as raw strings is wrong -- '13:34+01:00' sorts after
+    '12:35Z' lexically even though the former is the earlier instant --
+    so every comparison in this file goes through this first.
+    """
+    return datetime.fromisoformat(ts.replace("Z", "+00:00"))
+
+
 def _template_adoption_date(path: str) -> str:
     """ISO 8601 timestamp the given template was first added, via git history. Falls back to now if not yet committed."""
     proc = _run(["git", "log", "--diff-filter=A", "--format=%aI", "--", path])
@@ -86,7 +98,8 @@ def check_issues() -> dict:
     if proc.returncode != 0:
         return {"check": "issues", "status": "FAIL", "reason": f"could not list issues: {proc.stderr.strip()}"}
 
-    issues = [i for i in json.loads(proc.stdout) if i["createdAt"] >= adoption]
+    adoption_dt = _parse_iso(adoption)
+    issues = [i for i in json.loads(proc.stdout) if _parse_iso(i["createdAt"]) >= adoption_dt]
 
     if not issues:
         return {
@@ -122,7 +135,8 @@ def check_prs() -> dict:
     if proc.returncode != 0:
         return {"check": "pull_requests", "status": "FAIL", "reason": f"could not list PRs: {proc.stderr.strip()}"}
 
-    prs = [p for p in json.loads(proc.stdout) if p["createdAt"] >= adoption]
+    adoption_dt = _parse_iso(adoption)
+    prs = [p for p in json.loads(proc.stdout) if _parse_iso(p["createdAt"]) >= adoption_dt]
 
     if not prs:
         return {

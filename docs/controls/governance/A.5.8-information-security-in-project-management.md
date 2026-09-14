@@ -73,14 +73,23 @@ control.
 ## Verified against real GitHub data, not just written
 
 The evidence script was tested against two real issues created in this
-repo before being folded into ongoing use: one with the security
-fields correctly filled in with "N/A" (confirmed PASS), and one with
-the fields deliberately left as `_No response_` after flagging
-CONFIDENTIAL data (confirmed FAIL) - proving the check actually
-distinguishes engaged-with from skipped, not just that it runs without
-error. See the evidence manifest history for
-`check_project_management_security_review` for the record of this
-verification.
+repo: one with the security fields correctly filled in with "N/A"
+(confirmed PASS), and one with the fields deliberately left as `_No
+response_` after flagging CONFIDENTIAL data (confirmed FAIL) - proving
+the check actually distinguishes engaged-with from skipped, not just
+that it runs without error.
+
+This verification caught a real bug before it shipped: the first
+version compared `git log`'s local-timezone timestamp (`%aI`, e.g.
+`13:34:46+01:00`) against GitHub API's UTC timestamps (`Z` suffix) as
+raw strings. `"12:35Z" >= "13:34+01:00"` is false as a string
+comparison even though the first instant is *after* the second in
+real time - so every issue/PR would have been silently excluded as
+"before adoption" forever. Fixed by parsing both into aware `datetime`
+objects before comparing. See the evidence manifest history for
+`check_project_management_security_review` (the FAIL-then-PASS
+sequence around 2026-09-14T12:35-12:36Z) for the record of catching
+and fixing this.
 
 ## Known limitation, stated plainly
 
