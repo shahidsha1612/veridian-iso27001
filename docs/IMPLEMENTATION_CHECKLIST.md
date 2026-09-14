@@ -59,7 +59,7 @@ section.
 | 5.6 | Contact with special interest groups | T3 | [x] | [x] | Membership record in `docs/controls/governance/A.5.6-...md`; evidence in `evidence/controls/governance/5.6-.../` |
 | 5.8 | Information security in project management | T2 | [x] | [x] | Issue form (kickoff) + PR template (delivery) + GitHub API evidence pull; see `docs/controls/governance/A.5.8-...md`; evidence in `evidence/controls/governance/5.8-.../` |
 
-**LinkedIn write-up:** [ ] `docs/linkedin/01-governance.md`
+**LinkedIn write-up:** [x] `docs/linkedin/2026-09-14-governance-section-done.md`
 
 ## 2. Identity and access management
 
