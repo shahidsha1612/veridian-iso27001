@@ -62,7 +62,7 @@ not papered over here.
 ## Review trigger
 
 Re-reviewed immediately on any role change, new hire, or org
-restructure — not only at the calendar cadence in this file's
+restructure - not only at the calendar cadence in this file's
 frontmatter, which exists as a backstop in case no such change occurs.
 
 ## Version history

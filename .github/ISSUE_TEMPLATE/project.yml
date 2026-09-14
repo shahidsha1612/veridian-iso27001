@@ -1,0 +1,43 @@
+name: New project / feature
+description: Kick off a new project, feature, or epic. Required for anything beyond a small bug fix, per control 5.8 (Information security in project management) - security has to be considered at kickoff, not just discovered at PR time.
+title: "[Project]: "
+labels: ["project"]
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Project objective
+      description: What is this project trying to achieve?
+      placeholder: "e.g. Add MFA enforcement for privileged AWS access"
+    validations:
+      required: true
+  - type: dropdown
+    id: security-impact
+    attributes:
+      label: "Early risk check (control 5.8): does this project touch any of the following?"
+      description: Select all that apply. If anything other than "None of the above" is selected, fill in the security considerations field below.
+      multiple: true
+      options:
+        - RESTRICTED or CONFIDENTIAL data (per COMPANY.md classification)
+        - New or changed access/permissions (IAM, RBAC)
+        - A new external dependency or supplier
+        - Authentication, cryptography, or key management
+        - None of the above
+    validations:
+      required: true
+  - type: textarea
+    id: security-considerations
+    attributes:
+      label: Security considerations and planned controls
+      description: If anything other than "None of the above" was selected above, describe the risk and which Annex A control or existing mechanism addresses it. Otherwise write "N/A".
+      placeholder: "e.g. Touches CONFIDENTIAL PII; addressed by existing data classification tagging (5.12) and access control (5.15)"
+    validations:
+      required: true
+  - type: input
+    id: security-reviewer
+    attributes:
+      label: Security reviewer consulted
+      description: "Per the RACI (control 5.2), the GRC/Security engineer should be consulted for anything flagged above. Write \"N/A\" if none of the above applied."
+      placeholder: "e.g. GRC/Security engineer, 2026-09-14"
+    validations:
+      required: true

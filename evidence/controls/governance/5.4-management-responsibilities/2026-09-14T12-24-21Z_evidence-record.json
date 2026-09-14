@@ -1,0 +1,37 @@
+{
+  "check_name": "check_policy_freshness",
+  "control_id": "5.4",
+  "details": {
+    "default_warning_days": 30,
+    "policies_checked": [
+      {
+        "control_id": "5.4",
+        "last_reviewed": "2026-09-14",
+        "next_review_due": "2027-09-14",
+        "owner": "CEO / Management representative",
+        "path": "docs\\controls\\governance\\A.5.4-management-responsibilities.md",
+        "reason": "due in 365 day(s), within review cadence",
+        "status": "PASS"
+      },
+      {
+        "control_id": "5.4",
+        "last_reviewed": "2026-09-14",
+        "next_review_due": "2027-09-14",
+        "owner": "CEO / Management representative",
+        "path": "docs\\management-reviews\\2026-09-14-management-review.md",
+        "reason": "due in 365 day(s), within review cadence",
+        "status": "PASS"
+      }
+    ]
+  },
+  "evaluated_at": "2026-09-14T12:24:21Z",
+  "evaluated_state_ref": "docs\\controls\\governance\\A.5.4-management-responsibilities.md, docs\\management-reviews\\2026-09-14-management-review.md",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 168,
+  "policy_ref": "scripts/evidence/check_policy_freshness.py@ef6c18c",
+  "previous_manifest": "evidence\\controls\\governance\\5.4-management-responsibilities\\2026-09-14T12-12-32Z_evidence-record.json",
+  "result": "PASS",
+  "run_id": "local-20260914T122421Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}
