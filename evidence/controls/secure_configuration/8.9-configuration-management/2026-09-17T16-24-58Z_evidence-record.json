@@ -1,0 +1,67 @@
+{
+  "check_name": "check_configuration_drift",
+  "control_id": "8.9",
+  "details": {
+    "accounts": [
+      {
+        "allowlisted_exceptions": [
+          "arn:aws:iam::320473299574:user/tf-bootstrap-admin"
+        ],
+        "applied_terraform_dirs": [],
+        "expected": [],
+        "live": [
+          "arn:aws:iam::320473299574:user/tf-bootstrap-admin"
+        ],
+        "name": "veridian-workload",
+        "read_errors": [],
+        "unapplied_terraform_dirs": [
+          "terraform/iam-segregation-of-duties"
+        ]
+      },
+      {
+        "allowlisted_exceptions": [],
+        "applied_terraform_dirs": [
+          "terraform/evidence-vault"
+        ],
+        "expected": [
+          "arn:aws:kms:eu-west-1:699575760023:key/de17ce27-4cb0-48d8-b5e0-ec141009e1f5",
+          "arn:aws:s3:::veridian-iso27001-evidence-vault-699575760023"
+        ],
+        "live": [
+          "arn:aws:kms:eu-west-1:699575760023:key/de17ce27-4cb0-48d8-b5e0-ec141009e1f5",
+          "arn:aws:s3:::veridian-iso27001-evidence-vault-699575760023"
+        ],
+        "name": "veridian-evidence",
+        "read_errors": [],
+        "unapplied_terraform_dirs": []
+      }
+    ],
+    "checks": [
+      {
+        "check": "opa_unit_tests",
+        "reason": "PASS: 8/8",
+        "status": "PASS"
+      },
+      {
+        "check": "drift[veridian-workload]",
+        "reason": "1 live resource(s) all match Terraform state or a documented exception (1 allowlisted) (not yet applied: terraform/iam-segregation-of-duties; nothing live expected from these yet)",
+        "status": "PASS"
+      },
+      {
+        "check": "drift[veridian-evidence]",
+        "reason": "2 live resource(s) all match Terraform state or a documented exception (0 allowlisted)",
+        "status": "PASS"
+      }
+    ]
+  },
+  "evaluated_at": "2026-09-17T16:24:58Z",
+  "evaluated_state_ref": "terraform show -json (terraform/iam-segregation-of-duties, terraform/evidence-vault) vs live AWS account state (profiles veridian-workload, veridian-evidence)",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 168,
+  "policy_ref": "scripts/evidence/check_configuration_drift.py@de9a9f6",
+  "previous_manifest": null,
+  "result": "PASS",
+  "run_id": "local-20260917T162458Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}
