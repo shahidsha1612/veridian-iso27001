@@ -1,0 +1,77 @@
+{
+  "check_name": "check_configuration_drift",
+  "control_id": "8.9",
+  "details": {
+    "accounts": [
+      {
+        "allowlisted_exceptions": [
+          "arn:aws:iam::320473299574:user/tf-bootstrap-admin"
+        ],
+        "applied_terraform_dirs": [
+          "terraform/cloudtrail-logging",
+          "terraform/monitoring"
+        ],
+        "expected": [
+          "arn:aws:kms:eu-west-1:320473299574:key/05dbfe34-4290-442c-8662-195fa146c27c",
+          "arn:aws:s3:::veridian-iso27001-cloudtrail-320473299574"
+        ],
+        "live": [
+          "arn:aws:iam::320473299574:user/tf-bootstrap-admin",
+          "arn:aws:guardduty:eu-west-1:320473299574:detector/54e4c9de043045bea0e520fdd10b0949",
+          "arn:aws:cloudtrail:eu-west-1:320473299574:trail/veridian-iso27001-trail",
+          "arn:aws:kms:eu-west-1:320473299574:key/05dbfe34-4290-442c-8662-195fa146c27c",
+          "arn:aws:s3:::veridian-iso27001-cloudtrail-320473299574"
+        ],
+        "name": "veridian-workload",
+        "read_errors": [],
+        "unapplied_terraform_dirs": [
+          "terraform/iam-segregation-of-duties"
+        ]
+      },
+      {
+        "allowlisted_exceptions": [],
+        "applied_terraform_dirs": [
+          "terraform/evidence-vault"
+        ],
+        "expected": [
+          "arn:aws:kms:eu-west-1:699575760023:key/de17ce27-4cb0-48d8-b5e0-ec141009e1f5",
+          "arn:aws:s3:::veridian-iso27001-evidence-vault-699575760023"
+        ],
+        "live": [
+          "arn:aws:kms:eu-west-1:699575760023:key/de17ce27-4cb0-48d8-b5e0-ec141009e1f5",
+          "arn:aws:s3:::veridian-iso27001-evidence-vault-699575760023"
+        ],
+        "name": "veridian-evidence",
+        "read_errors": [],
+        "unapplied_terraform_dirs": []
+      }
+    ],
+    "checks": [
+      {
+        "check": "opa_unit_tests",
+        "reason": "PASS: 26/26",
+        "status": "PASS"
+      },
+      {
+        "check": "drift[veridian-workload]",
+        "reason": "veridian-workload: live resource \"arn:aws:cloudtrail:eu-west-1:320473299574:trail/veridian-iso27001-trail\" is not declared in Terraform state and is not an allowlisted exception; possible manual/out-of-band change; veridian-workload: live resource \"arn:aws:guardduty:eu-west-1:320473299574:detector/54e4c9de043045bea0e520fdd10b0949\" is not declared in Terraform state and is not an allowlisted exception; possible manual/out-of-band change",
+        "status": "FAIL"
+      },
+      {
+        "check": "drift[veridian-evidence]",
+        "reason": "2 live resource(s) all match Terraform state or a documented exception (0 allowlisted)",
+        "status": "PASS"
+      }
+    ]
+  },
+  "evaluated_at": "2026-10-08T11:34:46Z",
+  "evaluated_state_ref": "terraform show -json (terraform/iam-segregation-of-duties, terraform/evidence-vault) vs live AWS account state (profiles veridian-workload, veridian-evidence)",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 168,
+  "policy_ref": "scripts/evidence/check_configuration_drift.py@f706988",
+  "previous_manifest": "evidence\\controls\\secure_configuration\\8.9-configuration-management\\2026-10-08T11-27-40Z_evidence-record.json",
+  "result": "FAIL",
+  "run_id": "local-20261008T113446Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}
