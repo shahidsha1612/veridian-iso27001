@@ -1,0 +1,35 @@
+{
+  "check_name": "check_logging",
+  "control_id": "8.15",
+  "details": {
+    "checks": [
+      {
+        "check": "opa_unit_tests",
+        "reason": "PASS: 22/22",
+        "status": "PASS"
+      },
+      {
+        "check": "trail_status",
+        "reason": "veridian-iso27001-trail is multi-region, log-file-validated, KMS-encrypted (arn:aws:kms:eu-west-1:320473299574:key/05dbfe34-4290-442c-8662-195fa146c27c), and actively logging",
+        "status": "PASS"
+      }
+    ],
+    "trail": {
+      "is_logging": true,
+      "is_multi_region_trail": true,
+      "kms_key_id": "arn:aws:kms:eu-west-1:320473299574:key/05dbfe34-4290-442c-8662-195fa146c27c",
+      "log_file_validation_enabled": true,
+      "name": "veridian-iso27001-trail"
+    }
+  },
+  "evaluated_at": "2026-10-08T11:25:52Z",
+  "evaluated_state_ref": "aws cloudtrail describe-trails / get-trail-status, profile veridian-workload, trail veridian-iso27001-trail",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 24,
+  "policy_ref": "scripts/evidence/check_logging.py@dd788cb",
+  "previous_manifest": "evidence\\controls\\information_security_event_management\\8.15-logging\\2026-10-08T11-25-16Z_evidence-record.json",
+  "result": "PASS",
+  "run_id": "local-20261008T112552Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}
