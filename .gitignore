@@ -37,7 +37,7 @@ tfplan.out
 automated-controls/
 
 # LinkedIn write-ups: personal, not part of the public repo
-docs/linkedin/
+linkedin/
 
 # OS / editor cruft
 .DS_Store
