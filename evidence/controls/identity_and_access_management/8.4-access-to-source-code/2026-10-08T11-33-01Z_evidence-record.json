@@ -1,0 +1,38 @@
+{
+  "check_name": "check_source_code_access",
+  "control_id": "8.4",
+  "details": {
+    "checks": [
+      {
+        "check": "opa_unit_tests",
+        "reason": "PASS: 36/36",
+        "status": "PASS"
+      },
+      {
+        "check": "branch_protection",
+        "reason": "master requires 1 approving review(s), strict status checks ['required-checks'], admins enforced, no force-push/deletion",
+        "status": "PASS"
+      }
+    ],
+    "snapshot": {
+      "allow_deletions": false,
+      "allow_force_pushes": false,
+      "enforce_admins": true,
+      "required_approving_review_count": 1,
+      "required_status_check_contexts": [
+        "required-checks"
+      ],
+      "strict_status_checks": true
+    }
+  },
+  "evaluated_at": "2026-10-08T11:33:01Z",
+  "evaluated_state_ref": "github:shahidsha1612/veridian-iso27001 branches/master/protection",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 24,
+  "policy_ref": "scripts/evidence/check_source_code_access.py@dc3fe67",
+  "previous_manifest": "evidence\\controls\\identity_and_access_management\\8.4-access-to-source-code\\2026-10-08T10-59-06Z_evidence-record.json",
+  "result": "PASS",
+  "run_id": "local-20261008T113301Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}

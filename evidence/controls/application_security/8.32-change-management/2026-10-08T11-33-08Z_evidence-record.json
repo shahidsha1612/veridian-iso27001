@@ -1,0 +1,68 @@
+{
+  "check_name": "check_change_management",
+  "control_id": "8.32",
+  "details": {
+    "checks": [
+      {
+        "check": "opa_unit_tests",
+        "reason": "PASS: 36/36",
+        "status": "PASS"
+      },
+      {
+        "check": "merged_pr_history",
+        "reason": "all 5 PR(s) merged since 2026-09-14T12:53:33+01:00 had an independent approval and a successful required-checks run",
+        "status": "PASS"
+      }
+    ],
+    "snapshot": {
+      "adoption_date": "2026-09-14T12:53:33+01:00",
+      "pull_requests": [
+        {
+          "author": "shahidsha1612",
+          "latest_review_state": "APPROVED",
+          "latest_reviewer": "github-actions",
+          "number": 9,
+          "required_checks_conclusion": "success"
+        },
+        {
+          "author": "shahidsha1612",
+          "latest_review_state": "APPROVED",
+          "latest_reviewer": "github-actions",
+          "number": 8,
+          "required_checks_conclusion": "success"
+        },
+        {
+          "author": "shahidsha1612",
+          "latest_review_state": "APPROVED",
+          "latest_reviewer": "github-actions",
+          "number": 7,
+          "required_checks_conclusion": "success"
+        },
+        {
+          "author": "shahidsha1612",
+          "latest_review_state": "APPROVED",
+          "latest_reviewer": "github-actions",
+          "number": 6,
+          "required_checks_conclusion": "success"
+        },
+        {
+          "author": "shahidsha1612",
+          "latest_review_state": "APPROVED",
+          "latest_reviewer": "github-actions",
+          "number": 1,
+          "required_checks_conclusion": "success"
+        }
+      ]
+    }
+  },
+  "evaluated_at": "2026-10-08T11:33:08Z",
+  "evaluated_state_ref": "github:shahidsha1612/veridian-iso27001 merged pull requests into master, since gate adoption",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 168,
+  "policy_ref": "scripts/evidence/check_change_management.py@dc3fe67",
+  "previous_manifest": "evidence\\controls\\application_security\\8.32-change-management\\2026-10-08T10-59-17Z_evidence-record.json",
+  "result": "PASS",
+  "run_id": "local-20261008T113308Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}
