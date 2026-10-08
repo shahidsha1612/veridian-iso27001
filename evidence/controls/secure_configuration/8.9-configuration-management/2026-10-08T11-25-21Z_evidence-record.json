@@ -1,0 +1,28 @@
+{
+  "check_name": "check_policy_freshness",
+  "control_id": "8.9",
+  "details": {
+    "default_warning_days": 30,
+    "policies_checked": [
+      {
+        "control_id": "8.9",
+        "last_reviewed": "2026-09-17",
+        "next_review_due": "2027-03-17",
+        "owner": "GRC/Security engineer",
+        "path": "docs\\controls\\secure-configuration\\A.8.9-configuration-management.md",
+        "reason": "due in 160 day(s), within review cadence",
+        "status": "PASS"
+      }
+    ]
+  },
+  "evaluated_at": "2026-10-08T11:25:21Z",
+  "evaluated_state_ref": "docs\\controls\\secure-configuration\\A.8.9-configuration-management.md",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 168,
+  "policy_ref": "scripts/evidence/check_policy_freshness.py@dd788cb",
+  "previous_manifest": "evidence\\controls\\secure_configuration\\8.9-configuration-management\\2026-09-17T16-24-58Z_evidence-record.json",
+  "result": "PASS",
+  "run_id": "local-20261008T112521Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}

@@ -1,0 +1,37 @@
+{
+  "check_name": "check_monitoring",
+  "control_id": "8.16",
+  "details": {
+    "checks": [
+      {
+        "check": "opa_unit_tests",
+        "reason": "PASS: 26/26",
+        "status": "PASS"
+      },
+      {
+        "check": "monitoring_status",
+        "reason": "GuardDuty detector status is ENABLED, Security Hub is enabled (arn:aws:securityhub:eu-west-1:320473299574:hub/default)",
+        "status": "PASS"
+      }
+    ],
+    "snapshot": {
+      "guardduty": {
+        "status": "ENABLED"
+      },
+      "security_hub": {
+        "arn": "arn:aws:securityhub:eu-west-1:320473299574:hub/default",
+        "enabled": true
+      }
+    }
+  },
+  "evaluated_at": "2026-10-08T11:34:33Z",
+  "evaluated_state_ref": "aws guardduty list-detectors/get-detector, aws securityhub describe-hub, profile veridian-workload",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 24,
+  "policy_ref": "scripts/evidence/check_monitoring.py@f706988",
+  "previous_manifest": "evidence\\controls\\information_security_event_management\\8.16-monitoring-activities\\2026-09-17T16-50-41Z_evidence-record.json",
+  "result": "PASS",
+  "run_id": "local-20261008T113433Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}

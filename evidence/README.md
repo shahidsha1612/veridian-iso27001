@@ -61,6 +61,18 @@ three files (rather than one) means the signature can prove the other
 two haven't been tampered with, independently of anyone's word for it,
 including ours.
 
+## This folder is a mirror, not the only copy
+
+Every file here also exists in the real evidence vault: a
+tamper-evident, Object Lock S3 bucket in a dedicated AWS account
+(`veridian-evidence`), separate from the account anything described by
+this evidence actually runs in. Control 5.28 (Collection of evidence)
+and 5.33 (Protection of records) prove this live, on each run: that the
+vault is still configured correctly (Object Lock, versioning, a
+customer-managed key, no public access), and that what's in this local
+folder actually matches what's in the vault, byte for byte, not just in
+name. See `docs/controls/information-security-event-management/A.5.28-...md`.
+
 ## A note on the current signing method
 
 Records right now are signed with a locally-generated key pair

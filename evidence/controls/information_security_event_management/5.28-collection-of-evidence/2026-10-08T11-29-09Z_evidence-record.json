@@ -1,0 +1,46 @@
+{
+  "check_name": "check_evidence_vault",
+  "control_id": "5.28",
+  "details": {
+    "checks": [
+      {
+        "check": "opa_unit_tests",
+        "reason": "PASS: 22/22",
+        "status": "PASS"
+      },
+      {
+        "check": "vault_configuration",
+        "reason": "Object Lock GOVERNANCE, versioning enabled, SSE-KMS on the dedicated CMK, public access fully blocked",
+        "status": "PASS"
+      },
+      {
+        "check": "evidence_actually_collected",
+        "reason": "11 control(s) verified present and byte-identical in the vault: controls/governance/5.1-policies-for-information-security, controls/governance/5.2-information-security-roles-and-responsibilities, controls/governance/5.3-segregation-of-duties, controls/governance/5.4-management-responsibilities, controls/governance/5.5-contact-with-authorities, controls/governance/5.6-contact-with-special-interest-groups, controls/governance/5.8-information-security-in-project-management, controls/information_security_event_management/5.28-collection-of-evidence, controls/information_security_event_management/8.15-logging, controls/legal_and_compliance/5.33-protection-of-records, controls/secure_configuration/8.9-configuration-management",
+        "status": "PASS"
+      }
+    ],
+    "snapshot": {
+      "object_lock_enabled": "Enabled",
+      "public_access_block": {
+        "block_public_acls": true,
+        "block_public_policy": true,
+        "ignore_public_acls": true,
+        "restrict_public_buckets": true
+      },
+      "retention_mode": "GOVERNANCE",
+      "sse_algorithm": "aws:kms",
+      "sse_kms_key_matches_vault_cmk": true,
+      "versioning_status": "Enabled"
+    }
+  },
+  "evaluated_at": "2026-10-08T11:29:09Z",
+  "evaluated_state_ref": "aws s3api/kms against veridian-iso27001-evidence-vault-699575760023 (veridian-evidence), plus local evidence/ tree cross-check",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 24,
+  "policy_ref": "scripts/evidence/check_evidence_vault.py@dd788cb",
+  "previous_manifest": "evidence\\controls\\information_security_event_management\\5.28-collection-of-evidence\\2026-10-08T11-24-23Z_evidence-record.json",
+  "result": "PASS",
+  "run_id": "local-20261008T112909Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}
