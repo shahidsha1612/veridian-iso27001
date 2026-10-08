@@ -1,0 +1,46 @@
+{
+  "check_name": "check_evidence_vault",
+  "control_id": "5.33",
+  "details": {
+    "checks": [
+      {
+        "check": "opa_unit_tests",
+        "reason": "PASS: 22/22",
+        "status": "PASS"
+      },
+      {
+        "check": "vault_configuration",
+        "reason": "Object Lock GOVERNANCE, versioning enabled, SSE-KMS on the dedicated CMK, public access fully blocked",
+        "status": "PASS"
+      },
+      {
+        "check": "evidence_actually_collected",
+        "reason": "controls/governance/5.1-policies-for-information-security/2026-09-14T12-51-25Z_fingerprint.sha256: not readable from vault (download failed: s3://veridian-iso27001-evidence-vault-699575760023/controls/governance/5.1-policies-for-information-security/2026-09-14T12-51-25Z_fingerprint.sha256 to - An error occurred (404) when calling the HeadObject operation: Not Found); controls/governance/5.2-information-security-roles-and-responsibilities/2026-09-14T12-51-27Z_fingerprint.sha256: not readable from vault (download failed: s3://veridian-iso27001-evidence-vault-699575760023/controls/governance/5.2-information-security-roles-and-responsibilities/2026-09-14T12-51-27Z_fingerprint.sha256 to - An error occurred (404) when calling the HeadObject operation: Not Found); controls/governance/5.3-segregation-of-duties/2026-09-14T12-51-28Z_fingerprint.sha256: not readable from vault (download failed: s3://veridian-iso27001-evidence-vault-699575760023/controls/governance/5.3-segregation-of-duties/2026-09-14T12-51-28Z_fingerprint.sha256 to - An error occurred (404) when calling the HeadObject operation: Not Found); controls/governance/5.4-management-responsibilities/2026-09-14T12-51-29Z_fingerprint.sha256: not readable from vault (download failed: s3://veridian-iso27001-evidence-vault-699575760023/controls/governance/5.4-management-responsibilities/2026-09-14T12-51-29Z_fingerprint.sha256 to - An error occurred (404) when calling the HeadObject operation: Not Found); controls/governance/5.5-contact-with-authorities/2026-09-14T12-51-30Z_fingerprint.sha256: not readable from vault (download failed: s3://veridian-iso27001-evidence-vault-699575760023/controls/governance/5.5-contact-with-authorities/2026-09-14T12-51-30Z_fingerprint.sha256 to - An error occurred (404) when calling the HeadObject operation: Not Found); controls/governance/5.6-contact-with-special-interest-groups/2026-09-14T12-51-32Z_fingerprint.sha256: not readable from vault (download failed: s3://veridian-iso27001-evidence-vault-699575760023/controls/governance/5.6-contact-with-special-interest-groups/2026-09-14T12-51-32Z_fingerprint.sha256 to - An error occurred (404) when calling the HeadObject operation: Not Found); controls/information_security_event_management/8.15-logging/2026-09-17T16-42-29Z_fingerprint.sha256: not readable from vault (download failed: s3://veridian-iso27001-evidence-vault-699575760023/controls/information_security_event_management/8.15-logging/2026-09-17T16-42-29Z_fingerprint.sha256 to - An error occurred (404) when calling the HeadObject operation: Not Found); controls/secure_configuration/8.9-configuration-management/2026-09-17T16-24-58Z_fingerprint.sha256: not readable from vault (download failed: s3://veridian-iso27001-evidence-vault-699575760023/controls/secure_configuration/8.9-configuration-management/2026-09-17T16-24-58Z_fingerprint.sha256 to - An error occurred (404) when calling the HeadObject operation: Not Found)",
+        "status": "FAIL"
+      }
+    ],
+    "snapshot": {
+      "object_lock_enabled": "Enabled",
+      "public_access_block": {
+        "block_public_acls": true,
+        "block_public_policy": true,
+        "ignore_public_acls": true,
+        "restrict_public_buckets": true
+      },
+      "retention_mode": "GOVERNANCE",
+      "sse_algorithm": "aws:kms",
+      "sse_kms_key_matches_vault_cmk": true,
+      "versioning_status": "Enabled"
+    }
+  },
+  "evaluated_at": "2026-10-08T11:24:28Z",
+  "evaluated_state_ref": "aws s3api/kms against veridian-iso27001-evidence-vault-699575760023 (veridian-evidence), plus local evidence/ tree cross-check",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 24,
+  "policy_ref": "scripts/evidence/check_evidence_vault.py@dd788cb",
+  "previous_manifest": null,
+  "result": "FAIL",
+  "run_id": "local-20261008T112428Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}

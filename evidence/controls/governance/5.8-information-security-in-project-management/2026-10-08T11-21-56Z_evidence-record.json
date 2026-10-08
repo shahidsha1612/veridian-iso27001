@@ -1,0 +1,31 @@
+{
+  "check_name": "check_project_management_security_review",
+  "control_id": "5.8",
+  "details": {
+    "checks": [
+      {
+        "adoption_date": "2026-09-14T13:37:39+01:00",
+        "check": "issues",
+        "reason": "no project issues opened since template adoption (2026-09-14T13:37:39+01:00); nothing to evaluate yet",
+        "status": "PASS"
+      },
+      {
+        "adoption_date": "2026-09-14T13:37:39+01:00",
+        "check": "pull_requests",
+        "evaluated_count": 5,
+        "reason": "#11 (Build controls 8.4 (Access to source code) and 8.32 (Change management): live GitHub branch protection + merge history) missing the security-review checkbox entirely (template not used or removed); #10 (Build control 8.16 (Monitoring activities): live GuardDuty + Security Hub) missing the security-review checkbox entirely (template not used or removed); #9 (Build control 8.15 (Logging): live multi-region CloudTrail) missing the security-review checkbox entirely (template not used or removed); #8 (Build control 8.9 (Configuration management): live drift detection) missing the security-review checkbox entirely (template not used or removed); #7 (Encrypt docs/terraform/policies/scripts with git-crypt) missing the security-review checkbox entirely (template not used or removed)",
+        "status": "FAIL"
+      }
+    ]
+  },
+  "evaluated_at": "2026-10-08T11:21:56Z",
+  "evaluated_state_ref": "github:shahidsha1612/veridian-iso27001 issues(label=project) + pull requests, since each template's adoption date",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 168,
+  "policy_ref": "scripts/evidence/check_project_management_security_review.py@dd788cb",
+  "previous_manifest": "evidence\\controls\\governance\\5.8-information-security-in-project-management\\2026-09-14T12-51-33Z_evidence-record.json",
+  "result": "FAIL",
+  "run_id": "local-20261008T112156Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}
