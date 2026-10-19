@@ -73,6 +73,18 @@ customer-managed key, no public access), and that what's in this local
 folder actually matches what's in the vault, byte for byte, not just in
 name. See `docs/controls/information-security-event-management/A.5.28-...md`.
 
+## Some detail is deliberately not here
+
+A few controls (5.7 Threat intelligence, 5.25 Assessment of security
+events) work with detail that would be harmful to publish: security
+finding IDs, or which published advisories affect our own components.
+For those, the record here carries counts, timings, and decisions, and
+the full detail is stored only in the evidence vault, under a
+`restricted/` prefix. The record's `restricted_detail` field gives that
+file's vault location and its SHA-256 fingerprint. Because the record
+here is signed, an auditor given vault access can confirm the private
+file is exactly the one this public record was built from.
+
 ## A note on the current signing method
 
 Records right now are signed with a locally-generated key pair

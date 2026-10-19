@@ -1,0 +1,28 @@
+{
+  "check_name": "check_policy_freshness",
+  "control_id": "8.13",
+  "details": {
+    "default_warning_days": 30,
+    "policies_checked": [
+      {
+        "control_id": "8.13",
+        "last_reviewed": "2026-10-19",
+        "next_review_due": "2027-04-19",
+        "owner": "GRC/Security engineer",
+        "path": "docs\\controls\\continuity\\A.8.13-information-backup.md",
+        "reason": "due in 182 day(s), within review cadence",
+        "status": "PASS"
+      }
+    ]
+  },
+  "evaluated_at": "2026-10-19T15:24:38Z",
+  "evaluated_state_ref": "docs\\controls\\continuity\\A.8.13-information-backup.md",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 168,
+  "policy_ref": "scripts/evidence/check_policy_freshness.py@beaab7a",
+  "previous_manifest": "evidence\\controls\\continuity\\8.13-information-backup\\2026-10-19T15-20-53Z_evidence-record.json",
+  "result": "PASS",
+  "run_id": "local-20261019T152438Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}

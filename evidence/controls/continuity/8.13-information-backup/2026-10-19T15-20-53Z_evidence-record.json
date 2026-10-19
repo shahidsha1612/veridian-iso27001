@@ -1,0 +1,63 @@
+{
+  "check_name": "check_information_backup",
+  "control_id": "8.13",
+  "details": {
+    "checks": [
+      {
+        "check": "opa_unit_tests",
+        "reason": "PASS: 71/71",
+        "status": "PASS"
+      },
+      {
+        "check": "information_backup",
+        "reason": "on_demand recovery point 0.16h old restored in 334s (RTO target 3600s); 3 records byte-identical to source; scratch table deleted",
+        "status": "PASS"
+      }
+    ],
+    "max_recovery_point_age_hours": 26,
+    "plan": {
+      "exists": true,
+      "protected_resources": [
+        "arn:aws:dynamodb:eu-west-1:320473299574:table/veridian-security-event-triage"
+      ],
+      "retention_days": 35,
+      "schedule": "cron(0 3 * * ? *)"
+    },
+    "recovery_point": {
+      "age_hours": 0.16,
+      "arn": "arn:aws:backup:eu-west-1:320473299574:recovery-point:222138d7-ccea-40c9-835a-51828281cfa9",
+      "created_at": "2026-10-19T15:05:15Z",
+      "origin": "on_demand",
+      "status": "COMPLETED"
+    },
+    "restore_test": {
+      "changed_or_added_since_backup": 0,
+      "compared_items": 3,
+      "data_matches": true,
+      "restored_items": 3,
+      "restored_sha256": "c7659edf00f580914dfc6e57135a4dc59660dfe5a27b79c1785c20a650d5a744",
+      "rto_seconds": 334,
+      "scratch_deleted": true,
+      "scratch_table": "veridian-restore-test-20261019t151503z",
+      "source_items": 3,
+      "source_sha256": "c7659edf00f580914dfc6e57135a4dc59660dfe5a27b79c1785c20a650d5a744",
+      "status": "COMPLETED",
+      "unexpected_items_in_restore": 0
+    },
+    "rto_target_seconds": 3600,
+    "vault_lock": {
+      "enabled": true,
+      "min_retention_days": 7
+    }
+  },
+  "evaluated_at": "2026-10-19T15:20:53Z",
+  "evaluated_state_ref": "aws backup plan/selection/vault/recovery points, start-restore-job into a scratch table, dynamodb scan comparison, profile veridian-workload",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 168,
+  "policy_ref": "scripts/evidence/check_information_backup.py@beaab7a",
+  "previous_manifest": "evidence\\controls\\continuity\\8.13-information-backup\\2026-10-19T15-14-22Z_evidence-record.json",
+  "result": "PASS",
+  "run_id": "local-20261019T152053Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}

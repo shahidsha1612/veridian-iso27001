@@ -1,0 +1,92 @@
+{
+  "check_name": "check_security_event_triage",
+  "control_id": "5.25",
+  "details": {
+    "checks": [
+      {
+        "check": "opa_unit_tests",
+        "reason": "PASS: 71/71",
+        "status": "PASS"
+      },
+      {
+        "check": "security_event_triage",
+        "reason": "pipeline wired and Active, DLQ empty; 3 synthetic findings triaged end to end (slowest 13s, budget 900s) with policy-correct decisions; 3 register records all policy-correct; 3 findings in last 30d, 0 untriaged",
+        "status": "PASS"
+      }
+    ],
+    "coverage": {
+      "findings_in_window": 3,
+      "untriaged": 0,
+      "window_days": 30
+    },
+    "e2e_tests": [
+      {
+        "decision": "escalate_as_incident",
+        "finding_type": "CryptoCurrency:EC2/BitcoinTool.B!DNS",
+        "latency_seconds": 7,
+        "response_sla_hours": 4,
+        "severity": 8.0,
+        "severity_label": "High",
+        "triaged": true
+      },
+      {
+        "decision": "investigate",
+        "finding_type": "UnauthorizedAccess:IAMUser/ConsoleLoginSuccess.B",
+        "latency_seconds": 13,
+        "response_sla_hours": 24,
+        "severity": 5.0,
+        "severity_label": "Medium",
+        "triaged": true
+      },
+      {
+        "decision": "record_and_monitor",
+        "finding_type": "Recon:EC2/PortProbeUnprotectedPort",
+        "latency_seconds": 7,
+        "response_sla_hours": 168,
+        "severity": 2.0,
+        "severity_label": "Low",
+        "triaged": true
+      }
+    ],
+    "max_triage_latency_seconds": 900,
+    "pipeline": {
+      "dead_letter_configured": true,
+      "dead_letter_depth": 0,
+      "function_state": "Active",
+      "rule_matches_guardduty": true,
+      "rule_state": "ENABLED",
+      "targets_triage_function": true
+    },
+    "register_summary": {
+      "by_decision": {
+        "escalate_as_incident": 1,
+        "investigate": 1,
+        "record_and_monitor": 1
+      },
+      "by_severity_label": {
+        "High": 1,
+        "Low": 1,
+        "Medium": 1
+      },
+      "real_escalations": 0,
+      "real_records": 0,
+      "records": 3,
+      "sample_records": 3
+    },
+    "restricted_detail": {
+      "sha256": "c49a47f64ae5ef9ee9db4d40780b04a40aa6010274019fb9253352a38ae23284",
+      "uploaded": true,
+      "vault_key": "restricted/controls/information_security_event_management/5.25-assessment-and-decision-on-information-security-events/2026-10-19T15-04-13Z_triage-register.json"
+    }
+  },
+  "evaluated_at": "2026-10-19T15:04:14Z",
+  "evaluated_state_ref": "aws events/lambda/sqs config, guardduty create-sample-findings end-to-end test, dynamodb scan veridian-security-event-triage, guardduty list-findings (30d), profile veridian-workload",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 24,
+  "policy_ref": "scripts/evidence/check_security_event_triage.py@beaab7a",
+  "previous_manifest": null,
+  "result": "PASS",
+  "run_id": "local-20261019T150414Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}

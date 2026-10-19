@@ -1,0 +1,49 @@
+{
+  "check_name": "check_information_backup",
+  "control_id": "8.13",
+  "details": {
+    "checks": [
+      {
+        "check": "opa_unit_tests",
+        "reason": "PASS: 71/71",
+        "status": "PASS"
+      },
+      {
+        "check": "information_backup",
+        "reason": "on-demand backup job FAILED: Backup job failed because the lifecycle is outside the valid range for backup vault.; latest recovery point status is \"MISSING\", not COMPLETED; restore test status is \"NOT_STARTED\", not COMPLETED; the backup could not be restored",
+        "status": "FAIL"
+      }
+    ],
+    "max_recovery_point_age_hours": 26,
+    "plan": {
+      "exists": true,
+      "protected_resources": [
+        "arn:aws:dynamodb:eu-west-1:320473299574:table/veridian-security-event-triage"
+      ],
+      "retention_days": 35,
+      "schedule": "cron(0 3 * * ? *)"
+    },
+    "recovery_point": {
+      "age_hours": 0,
+      "status": "MISSING"
+    },
+    "restore_test": {
+      "status": "NOT_STARTED"
+    },
+    "rto_target_seconds": 3600,
+    "vault_lock": {
+      "enabled": true,
+      "min_retention_days": 7
+    }
+  },
+  "evaluated_at": "2026-10-19T15:04:39Z",
+  "evaluated_state_ref": "aws backup plan/selection/vault/recovery points, start-restore-job into a scratch table, dynamodb scan comparison, profile veridian-workload",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 168,
+  "policy_ref": "scripts/evidence/check_information_backup.py@beaab7a",
+  "previous_manifest": null,
+  "result": "FAIL",
+  "run_id": "local-20261019T150439Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}
