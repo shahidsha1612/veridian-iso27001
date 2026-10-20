@@ -52,6 +52,9 @@ jobs:
       - name: Run OPA test suite
         run: opa test policies/ -v
 
+      - name: Triage Lambda / policy parity (control 5.25)
+        run: python scripts/ci/check_triage_policy_parity.py
+
   auto-approve:
     name: auto-approve
     needs: required-checks
