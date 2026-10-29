@@ -1,0 +1,72 @@
+{
+  "check_name": "check_security_testing",
+  "control_id": "8.29",
+  "details": {
+    "checks": [
+      {
+        "check": "security_test_suite",
+        "reason": "security test \"dependency_audit\" passed with a known defect injected (django==3.2.0 (many published advisories) added to the CI requirements); it cannot detect what it guards",
+        "status": "FAIL"
+      }
+    ],
+    "required_status_checks": [
+      "required-checks"
+    ],
+    "tests": [
+      {
+        "command": "opa test policies/",
+        "in_ci_workflow": true,
+        "master_output": "PASS: 116/116",
+        "mutation": "5.14 policy accepts an Allow statement as a TLS deny rule",
+        "mutation_applied": true,
+        "mutation_caught": true,
+        "mutation_output": "policies\\information_transfer_test.rego:59:\ndata.information_transfer_test.test_allow_effect_is_denied: FAIL (3.1135ms)\n--------------------------------------------------------------------------------\nPASS: 115/116\nFAIL: 1/116",
+        "name": "opa_policy_tests",
+        "passes_on_master": true
+      },
+      {
+        "command": "python scripts/ci/check_triage_policy_parity.py",
+        "in_ci_workflow": true,
+        "master_output": "PASS: triage Lambda and policy agree at all 108 severities from 0.0 to 10.0 (policy edges probed: 4.0, 7.0, 9.0)",
+        "mutation": "5.25 Lambda's High band moved from 7.0 to 7.5, policy unchanged",
+        "mutation_applied": true,
+        "mutation_caught": true,
+        "mutation_output": "  - severity 7.01: Lambda says investigate / 24h, policy requires escalate_as_incident / 4h\n  - severity 7.1: Lambda says investigate / 24h, policy requires escalate_as_incident / 4h\n  - severity 7.2: Lambda says investigate / 24h, policy requires escalate_as_incident / 4h\n  - severity 7.3: Lambda says investigate / 24h, policy requires escalate_as_incident / 4h\n  - severity 7.4: Lambda says investigate / 24h, policy requires escalate_as_incident / 4h\n  - severity 7.49: Lambda says investigate / 24h, policy requires escalate_as_incident / 4h",
+        "name": "triage_policy_parity",
+        "passes_on_master": true
+      },
+      {
+        "command": "python scripts/ci/check_secure_coding.py",
+        "in_ci_workflow": true,
+        "master_output": "PASS: secure coding gate [semgrep 1.182.1 (31 files), bandit 1.9.4 (21 files)], 63 finding(s), none blocking without a current exception (2 in the register)",
+        "mutation": "new script under scripts/ builds a shell command from its argument with shell=True",
+        "mutation_applied": true,
+        "mutation_caught": true,
+        "mutation_output": "FAIL: secure coding gate, 2 problem(s) [semgrep 1.182.1 (27 files), bandit 1.9.4 (22 files)]\n  - bandit B602 at scripts/ci/_mutation_canary.py:5 (HIGH/HIGH): subprocess call with shell=True identified, security issue.\n  - semgrep python.lang.security.audit.subprocess-shell-true.subprocess-shell-true at scripts/ci/_mutation_canary.py:5 (ERROR/MEDIUM): Found 'subprocess' function 'call' with 'shell=True'. This is dangerous because this call will spawn the command using a shell process. Doing so propagates current shell settings and variables, which makes it much easier for a malicious actor to execute commands. Use 'shell=False' instead.",
+        "name": "secure_coding",
+        "passes_on_master": true
+      },
+      {
+        "command": "python scripts/ci/check_dependency_audit.py",
+        "in_ci_workflow": true,
+        "master_output": "PASS: dependency audit, 85 packages resolved from scripts/ci/requirements.txt, 5 known vulnerabilities, each under a current accepted risk (5 in the register)",
+        "mutation": "django==3.2.0 (many published advisories) added to the CI requirements",
+        "mutation_applied": true,
+        "mutation_caught": false,
+        "mutation_output": "  - django 3.2 has PYSEC-2026-2090 (fixed in [\"5.2.16\", \"6.0.7\"])\n  - django 3.2 has PYSEC-2026-2091 (fixed in [\"5.2.16\", \"6.0.7\"])\n  - django 3.2 has PYSEC-2026-2092 (fixed in [\"5.2.16\", \"6.0.7\"])\n  - django 3.2 has PYSEC-2026-3717 (fixed in [\"5.2.17\", \"6.0.8\", \"6.1.1\"])\n  - django 3.2 has PYSEC-2026-3717 (fixed in [\"5.2.17\", \"6.0.8\"])\n  - django 3.2 has PYSEC-2026-4035 (fixed in [\"5.2.17\", \"6.0.8\"])",
+        "name": "dependency_audit",
+        "passes_on_master": true
+      }
+    ]
+  },
+  "evaluated_at": "2026-10-28T15:15:44Z",
+  "evaluated_state_ref": "security test suite run on the working tree and on mutated copies; .github/workflows/segregation-of-duties.yml job required-checks; gh api repos/shahidsha1612/veridian-iso27001/branches/master/protection/required_status_checks",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 24,
+  "policy_ref": "scripts/evidence/check_security_testing.py@c232d5e",
+  "previous_manifest": null,
+  "result": "FAIL",
+  "run_id": "local-20261028T151544Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}
