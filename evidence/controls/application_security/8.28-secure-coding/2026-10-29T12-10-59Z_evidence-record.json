@@ -1,0 +1,119 @@
+{
+  "check_name": "check_secure_coding",
+  "control_id": "8.28",
+  "details": {
+    "checks": [
+      {
+        "check": "opa_unit_tests",
+        "reason": "PASS: 116/116",
+        "status": "PASS"
+      },
+      {
+        "check": "static_analysis",
+        "reason": "semgrep 1.182.1 (31 files), bandit 1.9.4 (21 files): 63 finding(s), none blocking without a current reviewed exception (2 in the register)",
+        "status": "PASS"
+      }
+    ],
+    "exceptions": [
+      {
+        "match": "exec(compile(ast.Module(body=keep",
+        "path": "scripts/ci/check_triage_policy_parity.py",
+        "reason": "Executes DECISION_TABLE and classify() pulled by ast from the triage Lambda's own source (terraform/security-event-triage/lambda/triage.py), so the 5.25 parity check tests the real code, not a copy. The input is a file in this repo that only changes through a reviewed PR (8.32); no external or runtime input reaches exec.",
+        "review_by": "2027-04-28",
+        "rule": "B102",
+        "tool": "bandit"
+      },
+      {
+        "match": "urllib.request.urlopen(req",
+        "path": "scripts/evidence/check_threat_intelligence.py",
+        "reason": "B310 flags urllib because it also opens file:// and custom schemes. _http_json now refuses any URL not starting with https:// before building the request, and every caller passes a fixed CISA or OSV.dev HTTPS constant.",
+        "review_by": "2027-04-28",
+        "rule": "B310",
+        "tool": "bandit"
+      }
+    ],
+    "findings_by_rule": [
+      {
+        "count": 1,
+        "rule": "B101",
+        "severity": "LOW",
+        "tool": "bandit"
+      },
+      {
+        "count": 1,
+        "rule": "B102",
+        "severity": "MEDIUM",
+        "tool": "bandit"
+      },
+      {
+        "count": 4,
+        "rule": "B105",
+        "severity": "LOW",
+        "tool": "bandit"
+      },
+      {
+        "count": 1,
+        "rule": "B310",
+        "severity": "MEDIUM",
+        "tool": "bandit"
+      },
+      {
+        "count": 18,
+        "rule": "B404",
+        "severity": "LOW",
+        "tool": "bandit"
+      },
+      {
+        "count": 26,
+        "rule": "B603",
+        "severity": "LOW",
+        "tool": "bandit"
+      },
+      {
+        "count": 12,
+        "rule": "B607",
+        "severity": "LOW",
+        "tool": "bandit"
+      }
+    ],
+    "findings_detail": {
+      "sha256": "cd87e757a31d013e08b8b7f885963d4dc10960868e3c080d5c32763e6bfad5a9",
+      "uploaded": true,
+      "vault_key": "restricted/controls/application_security/8.28-secure-coding/2026-10-29T12-10-58Z_findings-detail.json"
+    },
+    "findings_total": 63,
+    "scanners": [
+      {
+        "configs": [
+          "p/python",
+          "p/secrets"
+        ],
+        "errors": [],
+        "files_scanned": 31,
+        "tool": "semgrep",
+        "version": "1.182.1"
+      },
+      {
+        "errors": [],
+        "files_scanned": 21,
+        "tool": "bandit",
+        "version": "1.9.4"
+      }
+    ],
+    "targets": [
+      "scripts",
+      "terraform/security-event-triage/lambda"
+    ],
+    "today": "2026-10-29"
+  },
+  "evaluated_at": "2026-10-29T12:10:59Z",
+  "evaluated_state_ref": "semgrep + bandit over scripts, terraform/security-event-triage/lambda, judged by policies/secure_coding.rego",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 24,
+  "policy_ref": "scripts/evidence/check_secure_coding.py@c232d5e",
+  "previous_manifest": "evidence\\controls\\application_security\\8.28-secure-coding\\2026-10-28T15-16-21Z_evidence-record.json",
+  "result": "PASS",
+  "run_id": "local-20261029T121059Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}

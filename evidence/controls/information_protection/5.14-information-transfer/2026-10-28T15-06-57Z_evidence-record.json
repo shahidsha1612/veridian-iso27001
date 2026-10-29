@@ -1,0 +1,162 @@
+{
+  "check_name": "check_information_transfer",
+  "control_id": "5.14",
+  "details": {
+    "buckets": [
+      {
+        "account": "veridian-workload",
+        "name": "veridian-iso27001-cloudtrail-320473299574",
+        "policy": {
+          "Statement": [
+            {
+              "Action": "s3:GetBucketAcl",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "cloudtrail.amazonaws.com"
+              },
+              "Resource": "arn:aws:s3:::veridian-iso27001-cloudtrail-320473299574",
+              "Sid": "AWSCloudTrailAclCheck"
+            },
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "s3:x-amz-acl": "bucket-owner-full-control"
+                }
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "cloudtrail.amazonaws.com"
+              },
+              "Resource": "arn:aws:s3:::veridian-iso27001-cloudtrail-320473299574/AWSLogs/320473299574/*",
+              "Sid": "AWSCloudTrailWrite"
+            },
+            {
+              "Action": "s3:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false"
+                }
+              },
+              "Effect": "Deny",
+              "Principal": "*",
+              "Resource": [
+                "arn:aws:s3:::veridian-iso27001-cloudtrail-320473299574/*",
+                "arn:aws:s3:::veridian-iso27001-cloudtrail-320473299574"
+              ],
+              "Sid": "DenyInsecureTransport"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "probe": {
+          "http_denied": true,
+          "http_denied_by_resource_policy": true,
+          "http_error": "aws: [ERROR]: An error occurred (AccessDenied) when calling the ListObjectsV2 operation: User: arn:aws:iam::320473299574:user/tf-bootstrap-admin is not authorized to perform: s3:ListBucket on resource: \"arn:aws:s3:::veridian-iso27001-cloudtrail-320473299574\" with an explicit deny in a resource-based policy",
+          "https_error": "",
+          "https_ok": true
+        },
+        "region": "eu-west-1",
+        "tags": {
+          "iso27001:control": "8.15"
+        }
+      },
+      {
+        "account": "veridian-evidence",
+        "name": "veridian-iso27001-evidence-vault-699575760023",
+        "policy": {
+          "Statement": [
+            {
+              "Action": "s3:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false"
+                }
+              },
+              "Effect": "Deny",
+              "Principal": "*",
+              "Resource": [
+                "arn:aws:s3:::veridian-iso27001-evidence-vault-699575760023/*",
+                "arn:aws:s3:::veridian-iso27001-evidence-vault-699575760023"
+              ],
+              "Sid": "DenyInsecureTransport"
+            },
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringNotEquals": {
+                  "s3:x-amz-server-side-encryption-aws-kms-key-id": "arn:aws:kms:eu-west-1:699575760023:key/de17ce27-4cb0-48d8-b5e0-ec141009e1f5"
+                }
+              },
+              "Effect": "Deny",
+              "Principal": "*",
+              "Resource": "arn:aws:s3:::veridian-iso27001-evidence-vault-699575760023/*",
+              "Sid": "DenyPutWithoutVaultKMSKey"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "probe": {
+          "http_denied": true,
+          "http_denied_by_resource_policy": true,
+          "http_error": "aws: [ERROR]: An error occurred (AccessDenied) when calling the ListObjectsV2 operation: User: arn:aws:iam::699575760023:user/terraform-lab is not authorized to perform: s3:ListBucket on resource: \"arn:aws:s3:::veridian-iso27001-evidence-vault-699575760023\" with an explicit deny in a resource-based policy",
+          "https_error": "",
+          "https_ok": true
+        },
+        "region": "eu-west-1",
+        "tags": {
+          "iso27001:control": "5.28 5.33"
+        }
+      }
+    ],
+    "checks": [
+      {
+        "check": "opa_unit_tests",
+        "reason": "PASS: 84/84",
+        "status": "PASS"
+      },
+      {
+        "check": "tls_only_transfer",
+        "reason": "all 2 in-scope bucket(s) deny non-TLS requests by bucket policy, and a real signed plain-HTTP request to each was refused by that policy while the same request over HTTPS succeeded: veridian-iso27001-cloudtrail-320473299574, veridian-iso27001-evidence-vault-699575760023",
+        "status": "PASS"
+      }
+    ],
+    "out_of_scope_buckets": [
+      {
+        "account": "veridian-evidence",
+        "name": "acme-health-intake-evidence-ae9c06e2",
+        "project": "acme-health-intake"
+      },
+      {
+        "account": "veridian-evidence",
+        "name": "acme-health-intake-uploads-ae9c06e2",
+        "project": "acme-health-intake"
+      },
+      {
+        "account": "veridian-evidence",
+        "name": "cgep-app-starter-tfstate-699575760023",
+        "project": ""
+      },
+      {
+        "account": "veridian-evidence",
+        "name": "cgep-lab-dev-logs-ebefbc2c",
+        "project": "cgep-lab"
+      },
+      {
+        "account": "veridian-evidence",
+        "name": "cgep-lab-grc-evidence-vault-5d1c4c6d",
+        "project": "cgep-lab"
+      }
+    ]
+  },
+  "evaluated_at": "2026-10-28T15:06:57Z",
+  "evaluated_state_ref": "aws s3api list-buckets / get-bucket-policy plus HTTPS and plain-HTTP ListObjectsV2 probes, profiles veridian-workload, veridian-evidence",
+  "framework": "ISO27001:2022-AnnexA",
+  "freshness_sla_hours": 24,
+  "policy_ref": "scripts/evidence/check_information_transfer.py@c232d5e",
+  "previous_manifest": null,
+  "result": "PASS",
+  "run_id": "local-20261028T150657Z",
+  "signing_mode": "local-key-dev",
+  "trigger": "manual"
+}

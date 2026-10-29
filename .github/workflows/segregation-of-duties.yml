@@ -55,6 +55,15 @@ jobs:
       - name: Triage Lambda / policy parity (control 5.25)
         run: python scripts/ci/check_triage_policy_parity.py
 
+      - name: Install pinned security tooling (controls 8.28, 8.29)
+        run: pip install -r scripts/ci/requirements.txt
+
+      - name: Secure coding, Semgrep + Bandit (control 8.28)
+        run: python scripts/ci/check_secure_coding.py
+
+      - name: Dependency audit, pip-audit (control 8.29)
+        run: python scripts/ci/check_dependency_audit.py
+
   auto-approve:
     name: auto-approve
     needs: required-checks
